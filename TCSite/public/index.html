@@ -5,24 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
 
 <!----------------------------------------- Barra de navegação ----------------------------------------->
     <nav>
-        <div>
+        <div class="cont_pai_nav">
 
-            <div> <!--LOGO, ESQUERDA-->
+            <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
                 <img src="" alt="">
             </div>
             
-            <div>
-                <a href="">Home</a>
+            <div class="cont_filho_nav_centro">
+                <a href="#home">Home</a>
+                |
+                <a href="#MVV">Princípios</a>
+                |
+                <a href="#sobreN">sobre nós</a>
             </div>
             
-            <div> <!--DIREITA-->
+            <div class="cont_filho_nav_direita"> <!--DIREITA-->
                 <a href="">Cadastro</a>
+                |
                 <a href="">Login</a>
             </div>
        
@@ -32,40 +38,48 @@
     <hr>
 <!----------------------------------------- Barra de navegação ----------------------------------------->
 <!-----------------------------------------         Home       ----------------------------------------->
-    <div>
-        <div> <!--BACKGROUD IMAGE, BUTTON DIREITA-->
-            <button>Cadastrar</button>
-            <button>Entrar</button>
+    <div class="cont_pai_home">
+        <div class="cont_filho_home"> <!--BACKGROUD IMAGE, BUTTON DIREITA-->
+            <button id="btn_cadastrar">Cadastrar</button>
+            <button id="btn_login">Entrar</button>
         </div>
     </div>
 
     <hr>
 <!-----------------------------------------         Home       ----------------------------------------->
 <!-----------------------------------------          MVV       ----------------------------------------->
-    <div>
-        <div> <!--ESQUERDA-->
+    <div id="MVV" class="cont_pai_mvv">
+        <div class="cont_filho_mvv_missao"> <!--ESQUERDA-->
             <h1>Missão</h1>
+            
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui assumenda libero quibusdam ea! Sunt rerum est nostrum! Quidem pariatur ea temporibus ad placeat eligendi soluta assumenda deserunt ratione, magni impedit!
         </div>
 
-        <div> <!--CENTRO-->
+        <div class="cont_filho_mvv_visao"> <!--CENTRO-->
             <h1>Visão</h1>
+
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque, obcaecati! Fuga id, doloribus dolore cupiditate amet ratione repellendus magnam aperiam possimus natus porro perspiciatis nostrum quos adipisci officiis qui dolor!
         </div>
 
-        <div> <!--DIREITA-->
+        <div class="cont_filho_mvv_valor"> <!--DIREITA-->
             <h1>Valores</h1>
+            
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. At iusto voluptatum ab necessitatibus repellat quo nostrum vitae minus odit dignissimos impedit est qui eius laboriosam nam suscipit, sequi laudantium fuga?
         </div>
     </div>
 
     <hr>
 <!-----------------------------------------         MVV        ----------------------------------------->
 <!-----------------------------------------      Sobre nós     ----------------------------------------->
-    <div>
-        <div> <!--CARROSSEL, ESQUERDA-->
+    <div id="sobreN" class="cont_pai_sobreN">
+        <div class="cont_filho_sobreN_esquerda"> <!--CARROSSEL, ESQUERDA-->
 
         </div>
 
-        <div> <!--DIREITA-->
+        <div class="cont_filho_sobreN_direita"> <!--DIREITA-->
             <h1>Sobre nós</h1>
+
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius nam dolores perferendis saepe quas error, veritatis asperiores enim obcaecati nesciunt. Temporibus corrupti et magnam deleniti nihil consequuntur minima, fugit voluptatum.
         </div>
     </div>
 

@@ -1,0 +1,128 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    color: black;
+    text-decoration: none;
+}
+
+/* body{ */
+    /* margin: 20px; */
+/* } */
+
+h1{
+    margin-bottom: 15px;
+}
+
+/*----------------------------------------- Barra de navegação -----------------------------------------*/
+.cont_pai_nav {
+    background-color: rgb(42, 165, 54);
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cont_filho_nav_esquerda{
+    background-color: blue;
+    width: 10%;
+    height: 100%;
+    justify-self: start;
+}
+
+.cont_filho_nav_centro{
+    background-color: white;
+
+}
+
+.cont_filho_nav_direita{
+    background-color: wheat;
+    margin: 0px 20px;
+
+}
+
+/*----------------------------------------- Barra de navegação -----------------------------------------*/
+
+/*-----------------------------------------         Home       -----------------------------------------*/
+.cont_pai_home{
+    display: flex;
+    height: 300px;
+    background-color: blueviolet;
+    align-items: center;
+    justify-content: end;
+}
+
+.cont_filho_home{
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 33%;
+    margin: 20px;
+}
+
+#btn_cadastrar{
+    background-color: white;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+    border: 2px solid;
+}
+
+#btn_login{
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    cursor: pointer;
+    border: 2px solid;
+}
+/*-----------------------------------------         Home       -----------------------------------------*/
+
+/*-----------------------------------------          MVV       -----------------------------------------*/
+.cont_pai_mvv{
+    background-color: chocolate;
+    display: flex;
+    padding: 20px;
+    justify-content: space-evenly;
+    height: 200px;
+}
+
+.cont_filho_mvv_missao{
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.cont_filho_mvv_visao{
+    background-color: aliceblue;
+    text-align: center;
+    margin: 0px 20px;
+}
+
+.cont_filho_mvv_valor{
+    background-color: aliceblue;
+    text-align: center;
+}
+
+/*-----------------------------------------          MVV       -----------------------------------------*/
+
+/*-----------------------------------------      Sobre nós     -----------------------------------------*/
+.cont_pai_sobreN{
+    background-color: burlywood;
+    display: flex;
+    height: 400px;
+    justify-content: space-between;
+}
+
+.cont_filho_sobreN_esquerda{
+    background-color: bisque;
+    width: 60%;
+    margin-left: 20px;
+}
+
+.cont_filho_sobreN_direita{
+    background-color: bisque;
+    width: 33%;
+    margin-right: 20px;
+    text-align: center;
+}
+
