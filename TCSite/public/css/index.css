@@ -17,8 +17,10 @@ h1{
 /*----------------------------------------- Barra de navegação -----------------------------------------*/
 .cont_pai_nav {
     background-color: rgb(42, 165, 54);
+    position: fixed;
     display: flex;
-    height: 60px;
+    height: 80px;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
 }
@@ -50,6 +52,7 @@ h1{
     background-color: blueviolet;
     align-items: center;
     justify-content: end;
+    margin-top: 50px;
 }
 
 .cont_filho_home{
@@ -70,11 +73,21 @@ h1{
     border: 2px solid;
 }
 
+#btn_cadastrar:hover{
+    background-color: black;
+    color: white;
+}
+
 #btn_login{
     background-color: white;
     padding: 10px 20px 10px 20px;
     cursor: pointer;
     border: 2px solid;
+}
+
+#btn_login:hover{
+    background-color: black;
+    color: white;
 }
 /*-----------------------------------------         Home       -----------------------------------------*/
 
