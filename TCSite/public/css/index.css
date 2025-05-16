@@ -6,17 +6,30 @@
     text-decoration: none;
 }
 
+:root{
+    --site: #F8F1E2;
+    --element: #5C4309;
+    --textElement: #F9F7F2;
+    --title: #2A2313;
+}
+
 /* body{ */
 /* margin: 20px; */
 /* } */
 
 h1 {
     margin-bottom: 15px;
+    color: var(--textElement);
+}
+
+a{
+    color: var(--textElement);
+    font-size: large;
 }
 
 /*----------------------------------------- Barra de navegação -----------------------------------------*/
 .cont_pai_nav {
-    background-color: rgb(42, 165, 54);
+    background-color:var(--title);
     /* position: fixed; */
     display: flex;
     height: 80px;
@@ -26,19 +39,20 @@ h1 {
 }
 
 .cont_pai_nav .cont_filho_nav_esquerda {
-    background-color: blue;
+    background-color: black;
     width: 10%;
     height: 100%;
     justify-self: start;
 }
 
 .cont_pai_nav .cont_filho_nav_centro {
-    background-color: white;
+    color: var(--textElement);
+    
 
 }
 
 .cont_pai_nav .cont_filho_nav_direita {
-    background-color: wheat;
+    color: var(--textElement);
     margin: 0px 20px;
 
 }
@@ -49,7 +63,7 @@ h1 {
 .cont_pai_home {
     display: flex;
     height: 300px;
-    background-color: blueviolet;
+    background-color: var(--site);
     align-items: center;
     justify-content: end;
     /* margin-top: 80px; */
@@ -57,7 +71,7 @@ h1 {
 }
 
 .cont_pai_home .cont_filho_home {
-    background-color: aqua;
+    background-color: var(--element);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,14 +82,16 @@ h1 {
 }
 
 .cont_pai_home .cont_filho_home #btn_cadastrar {
-    background-color: white;
+    background-color: var(--textElement);
     padding: 10px 15px 10px 15px;
     cursor: pointer;
-    border: 2px solid;
+    font-size: large;
+    border: solid 1px;
+    font-weight: bolder;
 }
 
 .cont_pai_home .cont_filho_home #btn_cadastrar:hover {
-    background-color: black;
+    background-color: var(--title);
     color: white;
 }
 
@@ -83,11 +99,14 @@ h1 {
     background-color: white;
     padding: 10px 20px 10px 20px;
     cursor: pointer;
-    border: 2px solid;
+    font-size: large;
+    border: solid 1px;
+    font-weight: bolder;
+
 }
 
 .cont_pai_home .cont_filho_home #btn_login:hover {
-    background-color: black;
+    background-color: var(--title);
     color: white;
 }
 
@@ -95,7 +114,7 @@ h1 {
 
 /*-----------------------------------------          MVV       -----------------------------------------*/
 .cont_pai_mvv {
-    background-color: chocolate;
+    background-color: var(--site);
     display: flex;
     padding: 20px;
     justify-content: space-evenly;
@@ -103,33 +122,39 @@ h1 {
 }
 
 .cont_pai_mvv .cont_filho_mvv_missao {
-    background-color: aliceblue;
+    background-color: var(--element);
     text-align: center;
+    color: var(--textElement);
+    border: solid 3px var(--title);
 }
 
 .cont_pai_mvv .cont_filho_mvv_visao {
-    background-color: aliceblue;
+    background-color: var(--element);
     text-align: center;
+    color: var(--textElement);
+    border: solid 3px var(--title);
     margin: 0px 20px;
 }
 
 .cont_pai_mvv .cont_filho_mvv_valor {
-    background-color: aliceblue;
+    background-color: var(--element);
     text-align: center;
+    color: var(--textElement);
+    border: solid 3px var(--title);
 }
 
 /*-----------------------------------------          MVV       -----------------------------------------*/
 
 /*-----------------------------------------      Sobre nós     -----------------------------------------*/
 .cont_pai_sobreN {
-    background-color: burlywood;
+    background-color: var(--site);
     display: flex;
     height: 400px;
     justify-content: space-between;
 }
 
 .cont_pai_sobreN .cont_filho_sobreN_esquerda {
-    background-color: bisque;
+    background-color: var(--element);
     width: 60%;
     margin-left: 20px;
     display: flex;
@@ -138,14 +163,15 @@ h1 {
 }
 
 .cont_pai_sobreN .cont_filho_sobreN_direita {
-    background-color: bisque;
+    background-color: var(--element);
     width: 33%;
     margin-right: 20px;
     text-align: center;
+    color: var(--textElement);
 }
 
 .cont_pai_sobreN .cont_filho_sobreN_esquerda .cont_filho_sobreN_foto {
-    background-color: brown;
+    background-color: var(--site);
     width: 80%;
     height: 80%;
 }

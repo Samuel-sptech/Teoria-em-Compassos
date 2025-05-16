@@ -6,8 +6,15 @@
     text-decoration: none;
 }
 
+:root{
+    --site: #F8F1E2;
+    --element: #5C4309;
+    --textElement: #F9F7F2;
+    --title: #2A2313;
+}
+
 .cont_pai_principal{
-    background-color: crimson;
+    background-color: var(--site);
     width: 100%;
     height: 500px;
     display: flex;
@@ -15,45 +22,42 @@
     justify-content: center;
 }
 .cont_pai_principal .cont_pai_form {
-    background-color: blueviolet;
-    width: 40%;
+    background-color: var(--element);
+    width: 60%;
     height: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column
-
+    flex-direction: column;
+    border-radius: 5px;
 }
 
 .cont_pai_principal .cont_pai_form .cont_filho_form_campo{
-    height: 25px;
-    width: 70%;
+    height: 90px;
+    width: 90%;
     margin: 10px;
     border-radius: 5px;
 }
 
 .cont_pai_form_botao{
-    width: 80%;
-    margin-top: 10px;
-    background-color: aliceblue;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
 .cont_pai_principal .cont_pai_form .cont_pai_form_botao .cont_filho_form_botao{
-    background-color: aqua;
     height: 50px;
-    width: 100%;
-    margin: 10px;
+    width: 100px;
+    margin: 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .cont_pai_principal .cont_pai_form .cont_pai_form_botao .cont_filho_form_botao:hover{
-    background-color: rgb(55, 0, 255);
+    background-color: var(--title);
+    color: var(--textElement);
     height: 50px;
-    width: 100%;
-    margin: 10px;
+    width: 100px;
     border-radius: 5px;
 }
