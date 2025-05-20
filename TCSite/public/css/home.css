@@ -10,7 +10,7 @@
 
 nav .cont_pai_nav {
     background-color: brown;
-    width: 20%;
+    width: 10%;
     height: 780px;
     display: flex;
     flex-direction: column;
@@ -50,23 +50,65 @@ nav .cont_pai_nav {
 /* <!----------------------------------------- Barra de navegação -----------------------------------------> */
 
 .cont_avo_conteudo {
-    background-color: rgb(141, 114, 74);
-    width: 80%;
-    height: 780px;
-    margin-left: 20%;
-    display: flex;
-}
-
-.cont_avo_conteudo .cont_pai_card h1{
-    margin: 50px;
-}
-
-.cont_avo_conteudo .cont_pai_card .cont_filho_info{
     background-color: aliceblue;
-    height: 100px;
+    width: 90%;
+    height: 780px;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.cont_avo_conteudo .cont_pai_card h1 {
+    background-color: white;
+    margin: 20px;
+}
+
+.cont_avo_conteudo .cont_pai_card .cont_filho_info_card {
+    background-color: blueviolet;
+    height: 150px;
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.cont_avo_conteudo .cont_pai_card .cont_filho_info_card .cont_filho_conteudo_card {
+    background-color: white;
+    height: 100%;
+    width: 20%;
+    text-align: center;
+    border-radius: 6px; 
+}
+
+.cont_avo_conteudo .cont_pai_modulos {
+    background-color: blanchedalmond;
+    height: 65%;
     width: 100%;
 }
 
-.cont_avo_conteudo .cont_pai_card .cont_filho_info .cont_filho_conteudo{
-    
+.cont_avo_conteudo .cont_pai_modulos h1 {
+    background-color: white;
+    margin: 20px;
+}
+
+.cont_avo_conteudo .cont_pai_modulos .cont_filho_info_modulo {
+    background-color: blueviolet;
+    height: 80%;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.cont_avo_conteudo .cont_pai_modulos .cont_filho_info_modulo a .cont_filho_conteudo_modulo {
+    background-color: beige;
+    height: 70px;
+    display: flex;
+    align-items: center;       
+    justify-content: flex-start;
+    padding-left: 20px;         
+    border-radius: 6px;        
 }
