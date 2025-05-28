@@ -1,42 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo</title>
-    <link rel="stylesheet" href="../css/home.css">
+    <title>Teoria Musical - Som</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fdf6ef;
+            color: #4b3832;
+        }
+
+        /* NAVBAR */
+        nav .cont_pai_nav {
+            background-color: #5d4037;
+            width: 200px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 3px 0 8px rgba(0,0,0,0.1);
+        }
+
+        .cont_filho_nav_cima {
+            background-color: #8d6e63;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cont_filho_nav_cima img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        .cont_filho_nav_user {
+            background-color: #d7ccc8;
+            margin: 10px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            color: #4b3832;
+            font-weight: bold;
+        }
+
+        .cont_filho_nav_centro {
+            background-color: #efebe9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin: 10px;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .cont_filho_nav_centro a {
+            text-decoration: none;
+            color: #4b3832;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .cont_filho_nav_centro a:hover {
+            background-color: #a1887f;
+            color: white;
+        }
+
+        .cont_filho_nav_baixo {
+            background-color: #a1887f;
+            margin: 10px;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .cont_filho_nav_baixo a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #8d6e63;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-left: 200px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* CONTAINER */
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+            max-width: 1200px;
+        }
+
+        .intro {
+            background-color: #d7ccc8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .intro h2 {
+            margin-bottom: 10px;
+            color: #5d4037;
+        }
+
+        .intro p {
+            line-height: 1.6;
+        }
+
+        /* FLASHCARDS */
+        .flashcards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: transparent;
+            width: 100%;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .card-front {
+            background-color: #d7ccc8;
+            color: #4b3832;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .card-back {
+            background-color: #a1887f;
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            background-color: #8d6e63;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin-left: 200px;
+        }
+    </style>
 </head>
 <body>
-    <!----------------------------------------- Barra de navegação ----------------------------------------->
 
+    <!-- NAVBAR -->
     <nav>
         <div class="cont_pai_nav">
-
-            <div id="home" class="cont_filho_nav_cima"> <!--LOGO, CIMA-->
-                <img src="" alt="">
+            <div id="home" class="cont_filho_nav_cima">
+                <img src="" alt="Logo">
             </div>
-
             <div class="cont_filho_nav_user">
-                <span>Olá, User</span>
+                Olá, User 🎵
             </div>
-
-            <div class="cont_filho_nav_centro"> <!--MEIO-->
-
-                <a href="home.html"> HOME </a>
-
-                <a href="atividade.html"> ATIVIDADE </a>
-
-                <a href="perfil.html"> PERFIL </a>
-
+            <div class="cont_filho_nav_centro">
+                <a href="home.html">🏠 HOME</a>
+                <a href="atividade.html">📝 ATIVIDADE</a>
+                <a href="perfil.html">👤 PERFIL</a>
             </div>
-
-            <div class="cont_filho_nav_baixo"> <!--BAIXO-->
-                <a href="../index.html"> Sair</a>
+            <div class="cont_filho_nav_baixo">
+                <a href="../index.html">🚪 Sair</a>
             </div>
-
         </div>
     </nav>
-    <!----------------------------------------- Barra de navegação ----------------------------------------->
-    
+
+    <!-- HEADER -->
+    <header>
+        <h1>Teoria Musical - O Som 🎶</h1>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <div class="container">
+        <div class="intro">
+            <h2>O que é som?</h2>
+            <p>
+                O som, na música, é o elemento fundamental que dá vida às composições, permitindo a expressão artística
+                por meio da manipulação de suas propriedades. Fisicamente, o som é uma onda mecânica longitudinal
+                que se propaga através de meios materiais, como o ar, a água ou sólidos, sendo percebido pelo
+                ouvido humano quando essas vibrações atingem nossos tímpanos e são interpretadas pelo cérebro.
+            </p>
+        </div>
+
+        <h2>Propriedades do Som</h2>
+        <div class="flashcards">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Altura 🎵
+                    </div>
+                    <div class="card-back">
+                        Define se o som é agudo (frequência alta) ou grave (frequência baixa). É a percepção da frequência sonora.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Duração ⏳
+                    </div>
+                    <div class="card-back">
+                        É o tempo que o som permanece. Essencial para ritmo e métrica musical.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Intensidade 🔊
+                    </div>
+                    <div class="card-back">
+                        Refere-se ao volume: forte ou fraco. Determinada pela amplitude da onda sonora, medida em decibéis (dB).
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Timbre ✨
+                    </div>
+                    <div class="card-back">
+                        É a "cor" do som. Permite diferenciar instrumentos, mesmo tocando a mesma nota na mesma intensidade.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Teoria Musical Online 🎼
+    </footer>
+
 </body>
 </html>
