@@ -62,12 +62,15 @@
                 <h2>Senha:</h2>
                 <input type="text" class="cont_filho_form_campo" placeholder="Insira sua senha">
 
-                <button class="botao" onclick="entrar()">Entrar</button>
+                <div class="cont_pai_form_botao">
+                    <button class="cont_filho_form_botao" onclick="entrar()">Entrar</button>
 
 
-                <a href="index.html">
-                    <button class="cont_filho_form_botao">Voltar</button>
-                </a>
+                    <a href="index.html">
+                        <button class="cont_filho_form_botao">Voltar</button>
+                    </a>
+
+                </div>
 
                 <div id="div_aguardar" class="loading-div">
                     <img src="./assets/circle-loading.gif" id="loading-gif">
