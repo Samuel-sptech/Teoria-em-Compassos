@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cadastrar.css">
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="cont_pai_nav">
+
+            <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
+                <img src="" alt="">
+            </div>
+
+            <div class="cont_filho_nav_centro">
+                <a href="index.html">Home</a>
+                |
+                <a href="#MVV">Princípios</a>
+                |
+                <a href="#sobreN">Sobre nós</a>
+            </div>
+
+            <div class="cont_filho_nav_direita"> <!--DIREITA-->
+                <a href="cadastro.html">Cadastro</a>
+                |
+                <a href="login.html">Login</a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!----------------------------    cadastrar   ---------------------------->
+    <div class="cont_pai_principal">
+        <div class="cont_pai_form">
+                <h1>Cadastro</h1>
+
+
+            <h2>Nome:</h2>
+            <input type="text" id="nome_input" class="cont_filho_form_campo" placeholder="Insira seu nome">
+
+            <h2>Email:</h2>
+            <input type="email" id="email_input" class="cont_filho_form_campo" placeholder="Insira seu email">
+
+            <h2>Senha:</h2>
+            <input type="password" id="senha_input" class="cont_filho_form_campo" placeholder="Insira sua senha">
+
+            <h2>Confirmar Senha:</h2>
+            <input type="password"id="confirmacao_senha_input" class="cont_filho_form_campo" placeholder="Confirme sua senha">
+
+            <div class="cont_pai_form_botao">
+                <a href="login.html">
+                    <button class="cont_filho_form_botao">Cadastrar</button>
+                </a>
+
+                <a href="index.html">
+                    <button class="cont_filho_form_botao">Voltar</button> 
+                </a>
+            </div>
+        </div>
+    </div>
+    <!----------------------------    cadastrar   ---------------------------->
+
+        <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </div>
+    <!--footer fim-->
+</body>
+
+</html>
+
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" 
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else if (nomeVar.indexOf(`1`) !== -1 || nomeVar.indexOf(`2`) !== -1 || /*----------------------------NOME-----------------------------*/
+      nomeVar.indexOf(`3`) !== -1 || nomeVar.indexOf(`4`) !== -1 ||
+      nomeVar.indexOf(`5`) !== -1 || nomeVar.indexOf(`6`) !== -1 ||
+      nomeVar.indexOf(`7`) !== -1 || nomeVar.indexOf(`8`) !== -1 ||
+      nomeVar.indexOf(`9`) !== -1 || nomeVar.indexOf(`0`) !== -1) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `Nome inválido! Campo deve conter apenas caracteres alfabéticos!`;
+      finalizarAguardar();
+      return false;
+
+    } else if (emailVar.indexOf(`@`) <= 0 || emailVar.indexOf(`.`) > -1) { /*----------------------------EMAIL----------------------------*/
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `É necessário inserir e-mail valido!`;
+      finalizarAguardar();
+      return false;
+
+    } else if (senhaVar.indexOf("abc") !== -1 || /*----------------------------SENHA----------------------------*/
+      senhaVar.indexOf("123") !== -1 ||
+      senhaVar.indexOf("senha") !== -1 ||
+      senhaVar.length < 6 || senhaVar.indexOf(" ") !== -1) {
+
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `Senha não pode conter sequências óbvias, espaços e use no mínimo 8 caracteres`;
+      finalizarAguardar();
+      return false;
+
+    } else if (senhaVar !== confirmacaoSenhaVar) { /*---------------------------C.SENHA----------------------------*/
+
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `Senhas não coincidem, tente novamente`;
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    } 
+    
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro</title>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/estilo.css">
+    </head>
+
+    <body>
+
+        <nav>
+            <div class="cont_pai_nav">
+
+                <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
+                    <img src="" alt="">
+                </div>
+
+                <div class="cont_filho_nav_centro">
+                    <a href="index.html">Home</a>
+                    |
+                    <a href="#MVV">Princípios</a>
+                    |
+                    <a href="#sobreN">Sobre nós</a>
+                </div>
+
+                <div class="cont_filho_nav_direita"> <!--DIREITA-->
+                    <a href="cadastro.html">Cadastro</a>
+                    |
+                    <a href="login.html">Login</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <!----------------------------    cadastrar   ---------------------------->
+        <div class="cont_pai_principal">
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+            </div>
+            <div class="cont_pai_form">
+                <h1>Login</h1>
+
+                <h2>Email:</h2>
+                <input type="text" class="cont_filho_form_campo" placeholder="Insira seu email">
+
+                <h2>Senha:</h2>
+                <input type="text" class="cont_filho_form_campo" placeholder="Insira sua senha">
+
+                <button class="botao" onclick="entrar()">Entrar</button>
+
+
+                <a href="index.html">
+                    <button class="cont_filho_form_botao">Voltar</button>
+                </a>
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
+
+                <div id="div_erros_login"></div>
+            </div>
+        </div>
+        </div>
+    </body>
+
+    <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </div>
+    <!--footer fim-->
+
+</body>
+
+</html>
+
+<script>
+
+
+    function entrar() {
+        aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        } else if (emailVar.indexOf(`@`) <= 0 || emailVar.indexOf(`.`) > -1) { /*----------------------------EMAIL----------------------------*/
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = `É necessário inserir e-mail valido!`;
+            finalizarAguardar();
+            return false;
+
+        } else if (senhaVar.indexOf("abc") !== -1 || /*----------------------------SENHA----------------------------*/
+            senhaVar.indexOf("123") !== -1 ||
+            senhaVar.indexOf("senha") !== -1 ||
+            senhaVar.length < 8 || senhaVar.indexOf(" ") !== -1) {
+
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = `Senha não pode conter sequências óbvias, espaços e use no mínimo 8 caracteres`;
+            finalizarAguardar();
+            return false;
+
+        } else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>
