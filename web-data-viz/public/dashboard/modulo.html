@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teoria Musical - Som</title>
 
+    <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
+
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+
     <link rel="stylesheet" href="../css/modulo.css">
 </head>
-<body>
+
+<body onload="validarSessao()">
 
     <!-- NAVBAR -->
     <nav>
         <div class="cont_pai_nav">
-            <div id="home" class="cont_filho_nav_cima">
-                <img src="" alt="Logo">
+
+            <div id="home" class="cont_filho_nav_cima"> <!--LOGO, CIMA-->
+                <img src="../assets/Teoria_em_Compasso-Logo.png" alt="Logo">
             </div>
+
             <div class="cont_filho_nav_user">
-                Olá, User 
+                Olá, <span id="b_usuario">a</span>
             </div>
-            <div class="cont_filho_nav_centro">
-                <a href="home.html">Home</a>
-                <a href="atividade.html">Atividade</a>
-                <a href="perfil.html">Perfil</a>
+
+            <div class="cont_filho_nav_centro"> <!--MEIO-->
+
+                <a href="home.html"> Home </a>
+
+                <a href="atividade.html"> Atividade </a>
+
+                <a href="perfil.html"> Perfil </a>
+
             </div>
-            <div class="cont_filho_nav_baixo">
-                <a href="../index.html">Sair</a>
+
+            <div class="cont_filho_nav_baixo"> <!--BAIXO-->
+                <a onclick="limparSessao()"> Sair</a>
             </div>
+
         </div>
     </nav>
-
     <!-- HEADER -->
     <header>
         <h1>Teoria Musical - O Som 🎶</h1>
@@ -54,7 +69,8 @@
                         Altura 🎵
                     </div>
                     <div class="card-back">
-                        Define se o som é agudo (frequência alta) ou grave (frequência baixa). É a percepção da frequência sonora.
+                        Define se o som é agudo (frequência alta) ou grave (frequência baixa). É a percepção da
+                        frequência sonora.
                     </div>
                 </div>
             </div>
@@ -76,7 +92,8 @@
                         Intensidade 🔊
                     </div>
                     <div class="card-back">
-                        Refere-se ao volume: forte ou fraco. Determinada pela amplitude da onda sonora, medida em decibéis (dB).
+                        Refere-se ao volume: forte ou fraco. Determinada pela amplitude da onda sonora, medida em
+                        decibéis (dB).
                     </div>
                 </div>
             </div>
@@ -87,7 +104,8 @@
                         Timbre ✨
                     </div>
                     <div class="card-back">
-                        É a "cor" do som. Permite diferenciar instrumentos, mesmo tocando a mesma nota na mesma intensidade.
+                        É a "cor" do som. Permite diferenciar instrumentos, mesmo tocando a mesma nota na mesma
+                        intensidade.
                     </div>
                 </div>
             </div>
@@ -99,4 +117,5 @@
     </footer>
 
 </body>
+
 </html>

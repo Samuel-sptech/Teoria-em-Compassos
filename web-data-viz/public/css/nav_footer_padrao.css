@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+:root {
+    --bg-site: #F8F1E2;
+    --bg-element: #5C4309;
+    --text-element: #F9F7F2;
+    --title-color: #2A2313;
+}
+
+body {
+    background-color: var(--bg-site);
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--title-color);
+}
+
+a {
+    color: var(--text-element);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+a:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+/* ===================== NAVBAR ===================== */
+nav .cont_pai_nav {
+    background-color: var(--title-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 20px;
+}
+
+.cont_filho_nav_esquerda img {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.cont_filho_nav_centro,
+.cont_filho_nav_direita {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+    background-color: var(--title-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-element);
+}
+
+footer {
+    background-color: #8d6e63;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}

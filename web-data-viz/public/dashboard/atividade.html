@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+
+    <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
+
+</head>
+
+<body onload="validarSessao(), carregarQuestoes()">
+    <!----------------------------------------- Barra de navegação ----------------------------------------->
+
+    <nav>
+        <div class="cont_pai_nav">
+
+            <div id="home" class="cont_filho_nav_cima"> <!--LOGO, CIMA-->
+                <img src="../assets/Teoria_em_Compasso-Logo.png" alt="Logo">
+            </div>
+
+            <div class="cont_filho_nav_user">
+                Olá, <span id="b_usuario">a</span>
+            </div>
+
+            <div class="cont_filho_nav_centro"> <!--MEIO-->
+
+                <a href="home.html"> Home </a>
+
+                <a href="atividade.html"> Atividade </a>
+
+                <a href="perfil.html"> Perfil </a>
+
+            </div>
+
+            <div class="cont_filho_nav_baixo"> <!--BAIXO-->
+                <a onclick="limparSessao()"> Sair</a>
+            </div>
+
+        </div>
+    </nav>
+    <!----------------------------------------- Barra de navegação ----------------------------------------->
+
+    <div id="pontuacaoEJogo">
+        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+
+        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
+                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
+                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+            </div>
+            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
+                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
+                    <span id="spanPontuacaoFinal">***</span>
+                </span>
+                <span id="msgFinal" class="width-fit-content">***</span>
+            </div>
+        </div>
+
+        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
+
+            <div id="infoQuestao" class="padding-8">
+                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
+                    questões.</span>
+            </div>
+
+            <div id="perguntaDaQuestaoAtual" class="padding-8">
+                <span id="spanQuestaoExibida" class="text-bold"></span>
+            </div>
+
+            <div id="infoAlternativas" class="padding-8">
+                <span><em>Escolha uma opção dentre as abaixo:</em></span>
+            </div>
+
+            <div id="opcoes" class="flex-colunar padding-8">
+                <span>
+                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                </span>
+                <span>
+                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                </span>
+                <span>
+                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                </span>
+                <span>
+                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                </span>
+            </div>
+
+            <div id="botoes" class="flex-colunar padding-8">
+                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    let listaDeQuestoes = [];
+
+    async function carregarQuestoes() {
+        try {
+            const resposta = await fetch('http://localhost:3000/quiz/perguntas/1');
+            const dados = await resposta.json();
+
+            listaDeQuestoes = dados.map(q => {
+                const alternativas = q.alternativas;
+
+                return {
+                    pergunta: q.pergunta,
+                    alternativaA: alternativas[0]?.texto,
+                    alternativaB: alternativas[1]?.texto,
+                    alternativaC: alternativas[2]?.texto,
+                    alternativaD: alternativas[3]?.texto,
+                    alternativaCorreta: alternativas.find(alt => alt.correta === 1)
+                        ? `alternativa${['A', 'B', 'C', 'D'][alternativas.findIndex(alt => alt.correta === 1)]}`
+                        : null
+                };
+            });
+
+            quantidadeDeQuestoes = listaDeQuestoes.length;
+            iniciarQuiz();
+
+        } catch (error) {
+            console.error('Erro ao carregar perguntas:', error);
+        }
+    }
+
+    function enviarResultado(acertos, erros) {
+    const idUsuario = sessionStorage.ID_USUARIO; // Pegando o ID do usuário logado
+
+    fetch("/quiz/resultado", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: idUsuario,
+            acertos: acertos,
+            erros: erros
+        })
+    }).then(function (resposta) {
+        console.log("Enviando resultado do quiz...");
+
+        if (resposta.ok) {
+            console.log("Resultado registrado com sucesso!");
+        } else {
+            console.log("Houve um erro ao tentar registrar o resultado.");
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+    }).catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+    });
+}
+
+</script>

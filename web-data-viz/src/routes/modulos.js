@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-var aquarioController = require("../controllers/aquarioController");
+var moduloController = require("../controllers/moduloController");
 
 router.get("/:empresaId", function (req, res) {
-  aquarioController.buscarAquariosPorEmpresa(req, res);
+  moduloController.listarModulosComConteudos(req, res);
 });
 
 router.post("/cadastrar", function (req, res) {
-  aquarioController.cadastrar(req, res);
+  moduloController.cadastrar(req, res);
 })
 
 module.exports = router;

@@ -1,0 +1,145 @@
+/* ===================== QUIZ ===================== */
+
+#pontuacaoEJogo {
+    margin-left: 220px; /* para alinhar com a navbar fixa */
+    padding: 20px;
+    width: 80%;
+    background-color: #f7f1e1;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#btnIniciarQuiz {
+    background-color: #5d4037;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#btnIniciarQuiz:hover:not(:disabled) {
+    background-color: #8d6e63;
+}
+
+#pontuacao {
+    margin-bottom: 20px;
+    border: 2px solid #5d4037;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff8f0;
+}
+
+.flex-colunar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+.border-primary {
+    border-color: #5d4037;
+}
+
+.border-secondary {
+    border-color: #8d6e63;
+}
+
+#pontuacaoDuranteJogo span,
+#pontuacaoFinalJogo span {
+    font-size: 1rem;
+    color: #5d4037;
+}
+
+#pontuacaoFinalJogo {
+    border-top: 1px solid #5d4037;
+    padding-top: 12px;
+}
+
+#msgFinal {
+    margin-top: 8px;
+    font-weight: 600;
+    color: #a1887f;
+}
+
+#jogo {
+    width: 100%;
+    border: 2px solid #8d6e63;
+    border-radius: 12px;
+    background-color: #fef7f2;
+    padding: 20px;
+}
+
+#infoQuestao,
+#perguntaDaQuestaoAtual,
+#infoAlternativas {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #5d4037;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+#opcoes span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+input[type="radio"].radio {
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: #5d4037;
+    width: 18px;
+    height: 18px;
+}
+
+.option {
+    font-weight: 600;
+    color: #4b3832;
+}
+
+.option:hover {
+    color: #8d6e63;
+}
+
+#botoes {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#botoes button {
+    background-color: #5d4037;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+#botoes button:disabled {
+    background-color: #cfc3b7;
+    cursor: not-allowed;
+}
+
+#botoes button:hover:not(:disabled) {
+    background-color: #8d6e63;
+}

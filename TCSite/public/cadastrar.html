@@ -5,67 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/nav_footer_padrao.css"/>
     <link rel="stylesheet" href="css/cadastrar.css">
 </head>
 
 <body>
 
+    <!-- Nav -->
     <nav>
         <div class="cont_pai_nav">
 
-            <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
-                <img src="" alt="">
+            <div class="cont_filho_nav_esquerda">
+                <img src="" alt="Logo">
             </div>
 
             <div class="cont_filho_nav_centro">
-                <a href="index.html">Home</a>
-                |
-                <a href="#MVV">Princípios</a>
-                |
-                <a href="#sobreN">Sobre nós</a>
+                <a href="index.html">Home</a> |
+                <a href="index.html#MVV">Princípios</a> |
+                <a href="index.html#sobreN">Sobre nós</a>
             </div>
 
-            <div class="cont_filho_nav_direita"> <!--DIREITA-->
-                <a href="cadastrar.html">Cadastro</a>
-                |
+            <div class="cont_filho_nav_direita">
+                <a href="cadastrar.html">Cadastro</a> |
                 <a href="login.html">Login</a>
             </div>
 
         </div>
     </nav>
 
-
-    <!----------------------------    cadastrar   ---------------------------->
+    <!-- Formulário de Cadastro -->
     <div class="cont_pai_principal">
         <div class="cont_pai_form">
-                <h1>Cadastro</h1>
 
+            <h1>Cadastro</h1>
 
             <h2>Nome:</h2>
-            <input type="text" class="cont_filho_form_campo" placeholder="Insira seu nome">
+            <input type="text" placeholder="Insira seu nome">
 
             <h2>Email:</h2>
-            <input type="text" class="cont_filho_form_campo" placeholder="Insira seu email">
+            <input type="email" placeholder="Insira seu email">
 
             <h2>Senha:</h2>
-            <input type="text" class="cont_filho_form_campo" placeholder="Insira sua senha">
+            <input type="password" placeholder="Insira sua senha">
 
             <h2>Confirmar Senha:</h2>
-            <input type="text" class="cont_filho_form_campo" placeholder="Confirme sua senha">
+            <input type="password" placeholder="Confirme sua senha">
 
             <div class="cont_pai_form_botao">
-                <a href="login.html">
-                    <button class="cont_filho_form_botao">Cadastrar</button>
-                </a>
-
-                <a href="index.html">
-                    <button class="cont_filho_form_botao">Voltar</button> 
-                </a>
+                <button type="submit" class="cont_filho_form_botao">Entrar</button>
+                <a href="index.html" class="cont_filho_form_botao" role="button">Voltar</a>
             </div>
+
+
         </div>
     </div>
-    <!----------------------------    cadastrar   ---------------------------->
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div>© 2025 Seu Site</div>
+        <div>Desenvolvido por Você</div>
+        <div>Contato: email@exemplo.com</div>
+    </footer>
+
 
 </body>
 

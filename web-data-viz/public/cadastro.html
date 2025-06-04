@@ -2,147 +2,209 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/cadastrar.css">
-    <link rel="stylesheet" href="css/estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="css/nav_footer_padrao.css" />
+  <link rel="stylesheet" href="css/cadastrar.css">
+  <link rel="stylesheet" href="css/estilo.css">
+
+  <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
+
 </head>
 
 <body>
 
-    <nav>
-        <div class="cont_pai_nav">
+  <!-- Nav -->
 
-            <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
-                <img src="" alt="">
-            </div>
+  <nav>
+    <div class="cont_pai_nav">
 
-            <div class="cont_filho_nav_centro">
-                <a href="index.html">Home</a>
-                |
-                <a href="#MVV">Princípios</a>
-                |
-                <a href="#sobreN">Sobre nós</a>
-            </div>
+      <div class="cont_filho_nav_esquerda">
+        <img src="assets/Teoria_em_Compasso-Logo.ico" alt="Logo">
+      </div>
 
-            <div class="cont_filho_nav_direita"> <!--DIREITA-->
-                <a href="cadastro.html">Cadastro</a>
-                |
-                <a href="login.html">Login</a>
-            </div>
+      <div class="cont_filho_nav_centro">
+        <a href="index.html">Home</a> |
+        <a href="index.html#MVV">Princípios</a> |
+        <a href="index.html#sobreN">Sobre nós</a>
+      </div>
 
-        </div>
-    </nav>
+      <div class="cont_filho_nav_direita">
+        <a href="cadastro.html">Cadastro</a> |
+        <a href="login.html">Login</a>
+      </div>
 
-
-    <!----------------------------    cadastrar   ---------------------------->
-    <div class="cont_pai_principal">
-        <div class="cont_pai_form">
-                <h1>Cadastro</h1>
-
-
-            <h2>Nome:</h2>
-            <input type="text" id="nome_input" class="cont_filho_form_campo" placeholder="Insira seu nome">
-
-            <h2>Email:</h2>
-            <input type="email" id="email_input" class="cont_filho_form_campo" placeholder="Insira seu email">
-
-            <h2>Senha:</h2>
-            <input type="password" id="senha_input" class="cont_filho_form_campo" placeholder="Insira sua senha">
-
-            <h2>Confirmar Senha:</h2>
-            <input type="password"id="confirmacao_senha_input" class="cont_filho_form_campo" placeholder="Confirme sua senha">
-
-            <div class="cont_pai_form_botao">
-                <a href="login.html">
-                    <button class="cont_filho_form_botao">Cadastrar</button>
-                </a>
-
-                <a href="index.html">
-                    <button class="cont_filho_form_botao">Voltar</button> 
-                </a>
-            </div>
-        </div>
     </div>
-    <!----------------------------    cadastrar   ---------------------------->
+  </nav>
 
-        <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-            <span class="version">v1.0.0</span>
-        </div>
+  <!----------------------------    cadastrar   ---------------------------->
+  <div class="alerta_erro">
+    <div class="card_erro" id="cardErro">
+      <span id="mensagem_erro"></span>
     </div>
-    <!--footer fim-->
+  </div>
+  <div class="cont_pai_principal">
+    <div class="cont_pai_form">
+      <h1>Cadastro</h1>
+
+
+      <h2>Nome:</h2>
+      <input type="text" id="nome_input" class="cont_filho_form_campo" placeholder="Insira seu nome">
+
+      <h2>Email:</h2>
+      <input type="email" id="email_input" class="cont_filho_form_campo" placeholder="Insira seu email">
+
+      <h2>Senha:</h2>
+      <input type="password" id="senha_input" class="cont_filho_form_campo" placeholder="Insira sua senha">
+
+      <h2>Confirmar Senha:</h2>
+      <input type="password" id="confirmacao_senha_input" class="cont_filho_form_campo"
+        placeholder="Confirme sua senha">
+
+      <div class="cont_pai_form_botao">
+        <button onclick="cadastrar()" class="cont_filho_form_botao">Cadastrar</button>
+
+        <a href="index.html">
+          <button class="cont_filho_form_botao">Voltar</button>
+        </a>
+      </div>
+
+      <div id="div_aguardar" class="loading-div">
+        <img src="./assets/circle-loading.gif" id="loading-gif" />
+      </div>
+
+      <div id="div_erros_login"></div>
+
+    </div>
+  </div>
+  <!----------------------------    cadastrar   ---------------------------->
+
+  <!--footer inicio-->
+  <footer>
+    <div>© 2025 Seu Site</div>
+    <div>Desenvolvido por Você</div>
+    <div>Contato: email@exemplo.com</div>
+  </footer>
+  <!--footer fim-->
 </body>
 
 </html>
 
 <script>
 
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-
   function cadastrar() {
-    // aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    // Verificando se há algum campo em branco
+    const caracteresEspeciais = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/`~";
+
+    // Verificando campos em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" 
+      confirmacaoSenhaVar == ""
     ) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
+      mensagem_erro.innerHTML = "Preencha todos os campos";
       finalizarAguardar();
       return false;
-    } else if (nomeVar.indexOf(`1`) !== -1 || nomeVar.indexOf(`2`) !== -1 || /*----------------------------NOME-----------------------------*/
-      nomeVar.indexOf(`3`) !== -1 || nomeVar.indexOf(`4`) !== -1 ||
-      nomeVar.indexOf(`5`) !== -1 || nomeVar.indexOf(`6`) !== -1 ||
-      nomeVar.indexOf(`7`) !== -1 || nomeVar.indexOf(`8`) !== -1 ||
-      nomeVar.indexOf(`9`) !== -1 || nomeVar.indexOf(`0`) !== -1) {
+    }
+    // --------------------- Validação Nome ---------------------
+    let nomeInvalido = false;
+    for (let i = 0; i < nomeVar.length; i++) {
+      if ('0123456789'.indexOf(nomeVar[i]) !== -1) {
+        nomeInvalido = true;
+        break;
+      }
+    }
+    if (nomeInvalido) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML = `Nome inválido! Campo deve conter apenas caracteres alfabéticos!`;
+      mensagem_erro.innerHTML = "Nome inválido! Não use números.";
       finalizarAguardar();
       return false;
+    }
 
-    } else if (emailVar.indexOf(`@`) <= 0 || emailVar.indexOf(`.`) > -1) { /*----------------------------EMAIL----------------------------*/
+    // --------------------- Validação Email ---------------------
+    else if (emailVar.indexOf('@') <= 0 || emailVar.lastIndexOf('.') <= emailVar.indexOf('@') + 1) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML = `É necessário inserir e-mail valido!`;
+      mensagem_erro.innerHTML = "E-mail inválido!";
       finalizarAguardar();
       return false;
+    }
 
-    } else if (senhaVar.indexOf("abc") !== -1 || /*----------------------------SENHA----------------------------*/
+    // --------------------- Validação Senha ---------------------
+    // Verificar se tem letra maiúscula
+    let temMaiuscula = false;
+
+    for (let i = 0; i < senhaVar.length; i++) {
+
+      if (senhaVar[i] >= 'A' && senhaVar[i] <= 'Z') {
+        temMaiuscula = true;
+        break;
+      }
+    }
+
+    // Verificar se tem caractere especial
+    let temEspecial = false;
+
+    for (let i = 0; i < caracteresEspeciais.length; i++) {
+
+      if (senhaVar.indexOf(caracteresEspeciais[i]) !== -1) {
+        temEspecial = true;
+        break;
+      }
+    }
+
+    if ( // Verificar se contém sequências óbvias
       senhaVar.indexOf("123") !== -1 ||
-      senhaVar.indexOf("senha") !== -1 ||
-      senhaVar.length < 6 || senhaVar.indexOf(" ") !== -1) {
-
+      senhaVar.indexOf("abc") !== -1 ||
+      senhaVar.toLowerCase().indexOf("senha") !== -1
+    ) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML = `Senha não pode conter sequências óbvias, espaços e use no mínimo 8 caracteres`;
+      mensagem_erro.innerHTML = "Senha não pode conter sequências óbvias!";
       finalizarAguardar();
       return false;
 
-    } else if (senhaVar !== confirmacaoSenhaVar) { /*---------------------------C.SENHA----------------------------*/
-
+    } else if (senhaVar.indexOf(" ") !== -1) {  // Verificar espaço em branco na senha
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML = `Senhas não coincidem, tente novamente`;
+      mensagem_erro.innerHTML = "Senha não pode conter espaços!";
       finalizarAguardar();
       return false;
+
+    } else if (senhaVar.length < 6) { // Verificar tamanho da senha
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Senha deve ter no mínimo 6 caracteres!";
+      finalizarAguardar();
+      return false;
+
+    } else if (!temMaiuscula || !temEspecial) {
+      // Verificar maiúscula e caractere especial
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Senha deve conter pelo menos uma letra maiúscula e um caractere especial!";
+      finalizarAguardar();
+      return false;
+
+    } else if (senhaVar !== confirmacaoSenhaVar) {
+      // --------------------- Validação Confirmação Senha ---------------------
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "As senhas não coincidem!";
+      finalizarAguardar();
+      return false;
+
     } else {
       setInterval(sumirMensagem, 5000);
-    } 
-    
+    }
+
+    console.log({
+      nomeServer: nomeVar,
+      emailServer: emailVar,
+      senhaServer: senhaVar,
+    });
+
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",

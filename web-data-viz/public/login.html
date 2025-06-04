@@ -1,95 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="css/nav_footer_padrao.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
+
 </head>
 
 <body>
-    <!DOCTYPE html>
-    <html lang="pt-br">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro</title>
-        <link rel="stylesheet" href="css/index.css">
-        <link rel="stylesheet" href="css/login.css">
-        <link rel="stylesheet" href="css/estilo.css">
-    </head>
+    <nav>
+        <div class="cont_pai_nav">
 
-    <body>
-
-        <nav>
-            <div class="cont_pai_nav">
-
-                <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
-                    <img src="" alt="">
-                </div>
-
-                <div class="cont_filho_nav_centro">
-                    <a href="index.html">Home</a>
-                    |
-                    <a href="#MVV">Princípios</a>
-                    |
-                    <a href="#sobreN">Sobre nós</a>
-                </div>
-
-                <div class="cont_filho_nav_direita"> <!--DIREITA-->
-                    <a href="cadastro.html">Cadastro</a>
-                    |
-                    <a href="login.html">Login</a>
-                </div>
-
+            <div class="cont_filho_nav_esquerda">
+                <img src="assets/Teoria_em_Compasso-Logo.ico" alt="Logo">
             </div>
-        </nav>
 
-        <!----------------------------    cadastrar   ---------------------------->
-        <div class="cont_pai_principal">
-            <div class="alerta_erro">
-                <div class="card_erro" id="cardErro">
-                    <span id="mensagem_erro"></span>
-                </div>
+            <div class="cont_filho_nav_centro">
+                <a href="index.html">Home</a> |
+                <a href="index.html#MVV">Princípios</a> |
+                <a href="index.html#sobreN">Sobre nós</a>
             </div>
-            <div class="cont_pai_form">
-                <h1>Login</h1>
 
-                <h2>Email:</h2>
-                <input type="text" class="cont_filho_form_campo" placeholder="Insira seu email">
+            <div class="cont_filho_nav_direita">
+                <a href="cadastro.html">Cadastro</a> |
+                <a href="login.html">Login</a>
+            </div>
 
-                <h2>Senha:</h2>
-                <input type="text" class="cont_filho_form_campo" placeholder="Insira sua senha">
+        </div>
+    </nav>
 
-                <div class="cont_pai_form_botao">
-                    <button class="cont_filho_form_botao" onclick="entrar()">Entrar</button>
-
-
-                    <a href="index.html">
-                        <button class="cont_filho_form_botao">Voltar</button>
-                    </a>
-
-                </div>
-
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
-
-                <div id="div_erros_login"></div>
+    <!----------------------------    cadastrar   ---------------------------->
+    <div class="cont_pai_principal">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
             </div>
         </div>
-        </div>
-    </body>
+        <div class="cont_pai_form">
+            <h1>Login</h1>
 
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-            <span class="version">v1.0.0</span>
+            <h2>Email:</h2>
+            <input type="email" id="email_input" class="cont_filho_form_campo" placeholder="Insira seu email">
+
+            <h2>Senha:</h2>
+            <input type="password" id="senha_input" class="cont_filho_form_campo" placeholder="Insira sua senha">
+
+            <div class="cont_pai_form_botao">
+                <button class="cont_filho_form_botao" onclick="entrar()">Entrar</button>
+
+                <a href="index.html" class="cont_filho_form_botao">Voltar</a>
+            </div>
+
+            <div id="div_aguardar" class="loading-div">
+                <img src="./assets/circle-loading.gif" id="loading-gif">
+            </div>
+
+            <div id="div_erros_login"></div>
         </div>
     </div>
-    <!--footer fim-->
+    </div>
+</body>
+
+<!--footer inicio-->
+<div class="footer">
+    <div class="container">
+        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+        <span class="version">v1.0.0</span>
+    </div>
+</div>
+<!--footer fim-->
 
 </body>
 
@@ -100,34 +89,63 @@
 
     function entrar() {
         aguardar();
-
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
+        const caracteresEspeciais = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/`~";
+
+        // Verificar se campos estão vazios
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
-        } else if (emailVar.indexOf(`@`) <= 0 || emailVar.indexOf(`.`) > -1) { /*----------------------------EMAIL----------------------------*/
             cardErro.style.display = "block";
-            mensagem_erro.innerHTML = `É necessário inserir e-mail valido!`;
+            mensagem_erro.innerHTML = "Preencha todos os campos!";
+            finalizarAguardar();
+            return false;
+        } else if (emailVar.indexOf('@') <= 0 || emailVar.lastIndexOf('.') <= emailVar.indexOf('@') + 1) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "E-mail inválido!";
+            finalizarAguardar();
+            return false;
+        }
+
+        // --------------------- Validação Senha ---------------------
+        let temMaiuscula = false;
+        let temEspecial = false;
+
+        for (let i = 0; i < senhaVar.length; i++) {
+            if (senhaVar[i] >= 'A' && senhaVar[i] <= 'Z') {
+                temMaiuscula = true;
+            }
+        }
+
+        for (let i = 0; i < caracteresEspeciais.length; i++) {
+            if (senhaVar.indexOf(caracteresEspeciais[i]) !== -1) {
+                temEspecial = true;
+                break;
+            }
+        }
+
+        if (senhaVar.indexOf(" ") !== -1) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Senha não pode conter espaços!";
             finalizarAguardar();
             return false;
 
-        } else if (senhaVar.indexOf("abc") !== -1 || /*----------------------------SENHA----------------------------*/
-            senhaVar.indexOf("123") !== -1 ||
-            senhaVar.indexOf("senha") !== -1 ||
-            senhaVar.length < 8 || senhaVar.indexOf(" ") !== -1) {
+        } else if (senhaVar.length < 6) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Senha deve ter no mínimo 6 caracteres!";
+            finalizarAguardar();
+            return false;
 
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = `Senha não pode conter sequências óbvias, espaços e use no mínimo 8 caracteres`;
+        } else if (!temMaiuscula || !temEspecial) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Senha deve ter pelo menos uma letra maiúscula e um caractere especial!";
             finalizarAguardar();
             return false;
 
         } else {
-            setInterval(sumirMensagem, 5000)
+            setInterval(sumirMensagem, 5000);
         }
+
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -150,13 +168,13 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.MODULO = JSON.stringify(json.modulos)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "./dashboard/home.html";
                     }, 1000); // apenas para exibir o loading
 
                 });

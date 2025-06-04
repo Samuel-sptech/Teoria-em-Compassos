@@ -1,114 +1,200 @@
+/* ===================== RESET GLOBAL ===================== */
 * {
-    padding: 0px;
-    margin: 0px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     border: none;
-    color: black;
     text-decoration: none;
+    color: inherit;
 }
 
-/* <!----------------------------------------- Barra de navegação -----------------------------------------> */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fdf6ef;
+    color: #4b3832;
+}
 
+/* ===================== NAVBAR ===================== */
 nav .cont_pai_nav {
-    background-color: brown;
-    width: 10%;
-    height: 780px;
+    background-color: #5d4037;
+    width: 200px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.cont_pai_nav .cont_filho_nav_cima {
-    background-color: darkkhaki;
-    height: 130px;
-    margin: 10px;
+.cont_filho_nav_cima {
+    background-color: #8d6e63;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cont_pai_nav .cont_filho_nav_user {
-    background-color: blanchedalmond;
+.cont_filho_nav_cima img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.cont_filho_nav_user {
+    background-color: #d7ccc8;
     margin: 10px;
     text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
 }
 
 .cont_filho_nav_centro {
-    background-color: burlywood;
-    height: 50%;
-    text-align: center;
-    font-weight: 100;
+    background-color: #efebe9;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
     margin: 10px;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.cont_filho_nav_baixo a {
+    cursor: pointer;
+}
+
+.cont_filho_nav_centro a {
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cont_filho_nav_centro a:hover {
+    background-color: #a1887f;
+    color: white;
 }
 
 .cont_filho_nav_baixo {
-    background-color: darkkhaki;
-    text-align: center;
+    background-color: #a1887f;
     margin: 10px;
-}
-
-/* <!----------------------------------------- Barra de navegação -----------------------------------------> */
-
-.cont_avo_conteudo {
-    background-color: aliceblue;
-    width: 90%;
-    height: 780px;
-    margin-left: 10%;
-    display: flex;
-    flex-direction: column;
-}
-
-
-.cont_avo_conteudo .cont_pai_card h1 {
-    background-color: white;
-    margin: 20px;
-}
-
-.cont_avo_conteudo .cont_pai_card .cont_filho_info_card {
-    background-color: blueviolet;
-    height: 150px;
-    width: 98%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.cont_avo_conteudo .cont_pai_card .cont_filho_info_card .cont_filho_conteudo_card {
-    background-color: white;
-    height: 100%;
-    width: 20%;
+    padding: 12px;
     text-align: center;
-    border-radius: 6px; 
+    border-radius: 8px;
 }
 
-.cont_avo_conteudo .cont_pai_modulos {
-    background-color: blanchedalmond;
-    height: 65%;
-    width: 100%;
+.cont_filho_nav_baixo a {
+    color: white;
+    font-weight: bold;
 }
 
-.cont_avo_conteudo .cont_pai_modulos h1 {
-    background-color: white;
-    margin: 20px;
-}
-
-.cont_avo_conteudo .cont_pai_modulos .cont_filho_info_modulo {
-    background-color: blueviolet;
-    height: 80%;
-    width: 98%;
+/* ===================== CONTEÚDO PRINCIPAL ===================== */
+.cont_avo_conteudo {
+    margin-left: 220px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
+    gap: 30px;
 }
 
-.cont_avo_conteudo .cont_pai_modulos .cont_filho_info_modulo a .cont_filho_conteudo_modulo {
-    background-color: beige;
-    height: 70px;
+/* ===== Cards de Informações ===== */
+
+.cont_pai_card h1 {
+    color: #5d4037;
+    margin-bottom: 10px;
+}
+
+.cont_filho_info_card {
+    background-color: #8d6e63;
     display: flex;
-    align-items: center;       
-    justify-content: flex-start;
-    padding-left: 20px;         
-    border-radius: 6px;        
+    gap: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+}
+
+.cont_filho_conteudo_card {
+    background-color: white;
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.cont_filho_conteudo_card:hover {
+    background-color: #d7ccc8;
+    cursor: pointer;
+}
+
+/* ===== Área de Módulos ===== */
+.cont_pai_modulos h1 {
+    color: #5d4037;
+    margin-bottom: 10px;
+}
+
+.cont_filho_info_modulo {
+    background-color: #8d6e63;
+    display: flex;
+    flex-direction: column;  /* <-- linha abaixo da outra */
+    gap: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cont_filho_conteudo_modulo {
+    background-color: beige;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    transition: background-color 0.3s;
+    border: 2px solid #3e2723;
+}
+
+.cont_filho_conteudo_modulo:hover {
+    background-color: #d7ccc8;
+    cursor: pointer;
+}
+
+.info-id {
+    width: 50px;
+    color: #5d4037;
+}
+
+.info-nome {
+    width: 200px;
+    color: #3e2723;
+    font-weight: 600;
+}
+
+.info-descricao {
+    flex: 1;
+    color: #4e342e;
+    font-weight: normal;
+}
+
+
+footer {
+    background-color: #8d6e63;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    margin-left: 200px;
 }

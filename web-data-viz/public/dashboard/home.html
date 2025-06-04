@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="../css/home.css">
+
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+
+    <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload="validarSessao(), exibirmodulos() ">
+
+    <!----------------------------------------- Barra de navegação ----------------------------------------->
+
+    <nav>
+        <div class="cont_pai_nav">
+
+            <div id="home" class="cont_filho_nav_cima"> <!--LOGO, CIMA-->
+                <img src="../assets/Teoria_em_Compasso-Logo.png" alt="Logo">
+            </div>
+
+            <div class="cont_filho_nav_user">
+                Olá, <span id="b_usuario">a</span>
+            </div>
+
+            <div class="cont_filho_nav_centro"> <!--MEIO-->
+
+                <a href="home.html"> Home </a>
+
+                <a href="atividade.html"> Atividade </a>
+
+                <a href="perfil.html"> Perfil </a>
+
+            </div>
+
+            <div class="cont_filho_nav_baixo"> <!--BAIXO-->
+                <a onclick="limparSessao()"> Sair</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="cont_avo_conteudo"> <!--LAYOUT-->
+
+        <div class="cont_pai_card">
+            <h1>Conteudos</h1>
+
+            <div class="cont_filho_info_card">
+                <div class="cont_filho_conteudo_card">cont 1 - modulos completos</div>
+                <div class="cont_filho_conteudo_card">cont 2 - atividades completas</div>
+                <div class="cont_filho_conteudo_card">cont 3 - porcentagem de acertos</div>
+                <div class="cont_filho_conteudo_card">cont 4 - o que eu coloco?</div>
+            </div>
+        </div>
+
+        <div class="cont_pai_modulos">
+            <h1>Módulos</h1>
+
+            <div class="cont_filho_info_modulo" id="cardmodulos">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Teoria Musical Online 🎼
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+
+    function exibirmodulos() {
+
+        JSON.parse(sessionStorage.MODULO).forEach(item => {
+            document.getElementById("cardmodulos").innerHTML += `
+            <div class="cont_filho_conteudo_modulo" onclick="abrirModulo(${item.idModulo})">
+                <div class="info-id">#${item.idModulo}</div>
+                <div class="info-nome">${item.nomeModulo}</div>
+                <div class="info-descricao">${item.descricaoModulo}</div>
+            </div>
+        `;
+        });
+    }
+
+    function abrirModulo(idModulo) {
+        sessionStorage.setItem("moduloSelecionado", idModulo);
+        window.location.href = "./modulo.html"; // ou o nome da sua página
+    }
+
+    
+
+
+</script>

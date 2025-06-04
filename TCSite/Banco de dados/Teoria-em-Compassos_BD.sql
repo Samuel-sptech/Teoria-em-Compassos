@@ -3,13 +3,13 @@ CREATE DATABASE TeoriaCompassos;
 USE TeoriaCompassos;
 
 -- TABELAS --
-
+select * from usuario;
 -- Tabela Usuário
 CREATE TABLE usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    senha CHAR(6) NOT NULL,
+    senha VARCHAR(32) NOT NULL,
     dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

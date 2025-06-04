@@ -1,75 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/nav_footer_padrao.css"/>
+    <link rel="stylesheet" href="css/login.css" />
 </head>
 
 <body>
-    <!DOCTYPE html>
-    <html lang="pt-br">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro</title>
-        <link rel="stylesheet" href="css/index.css">
-        <link rel="stylesheet" href="css/login.css">
-    </head>
+    <!-- Nav -->
+    <nav>
+        <div class="cont_pai_nav">
 
-    <body>
-
-        <nav>
-            <div class="cont_pai_nav">
-
-                <div id="home" class="cont_filho_nav_esquerda"> <!--LOGO, ESQUERDA-->
-                    <img src="" alt="">
-                </div>
-
-                <div class="cont_filho_nav_centro">
-                    <a href="index.html">Home</a>
-                    |
-                    <a href="#MVV">Princípios</a>
-                    |
-                    <a href="#sobreN">Sobre nós</a>
-                </div>
-
-                <div class="cont_filho_nav_direita"> <!--DIREITA-->
-                    <a href="cadastrar.html">Cadastro</a>
-                    |
-                    <a href="login.html">Login</a>
-                </div>
-
+            <div class="cont_filho_nav_esquerda">
+                <img src="" alt="Logo" />
             </div>
-        </nav>
 
-        <!----------------------------    cadastrar   ---------------------------->
-        <div class="cont_pai_principal">
-            <div class="cont_pai_form">
-                <h1>Login</h1>
-
-                <h2>Email:</h2>
-                <input type="text" class="cont_filho_form_campo" placeholder="Insira seu email">
-
-                <h2>Senha:</h2>
-                <input type="text" class="cont_filho_form_campo" placeholder="Insira sua senha">
-
-                <div class="cont_pai_form_botao">
-                    <a href="site/home.html">
-                        <button class="cont_filho_form_botao">Entrar</button>
-                    </a>
-
-                    <a href="index.html">
-                        <button class="cont_filho_form_botao">Voltar</button>
-                    </a>
-                </div>
+            <div class="cont_filho_nav_centro">
+                <a href="index.html">Home</a> |
+                <a href="#MVV">Princípios</a> |
+                <a href="#sobreN">Sobre nós</a>
             </div>
+
+            <div class="cont_filho_nav_direita">
+                <a href="cadastrar.html">Cadastro</a> |
+                <a href="login.html">Login</a>
+            </div>
+
         </div>
-    </body>
+    </nav>
 
-    </html>
+    <!-- Formulário de Login -->
+    <div class="cont_pai_principal">
+        <form class="cont_pai_form" action="site/home.html" method="POST">
+
+            <h1>Login</h1>
+
+            <h2>Email:</h2>
+            <input
+                type="email"
+                name="email"
+                class="cont_filho_form_campo"
+                placeholder="Insira seu email"
+                required
+            />
+
+            <h2>Senha:</h2>
+            <input
+                type="password"
+                name="senha"
+                class="cont_filho_form_campo"
+                placeholder="Insira sua senha"
+                required
+            />
+
+            <div class="cont_pai_form_botao">
+                <button type="submit" class="cont_filho_form_botao">Entrar</button>
+                <a href="index.html" class="cont_filho_form_botao" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">Voltar</a>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>© 2025 Seu Site</div>
+        <div>Desenvolvido por Você</div>
+        <div>Contato: email@exemplo.com</div>
+    </footer>
+
 </body>
 
 </html>
