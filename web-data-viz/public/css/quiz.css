@@ -98,6 +98,23 @@ nav .cont_pai_nav {
     margin-left: 220px;
 }
 
+#btnSubmeter, #btnProx{
+    background-color: #5d4037;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#btnSubmeter:hover, #btnProx:hover{
+    background-color: #8d6e63;
+}
+
+
 #pontuacaoEJogo {
     margin-left: 220px; /* alinhado com navbar fixa */
     padding: 20px;
