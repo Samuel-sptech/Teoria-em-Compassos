@@ -1,21 +1,15 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-var quizController = require("../controllers/quizController"); // corrigido aqui
+const quizController = require("../controllers/quizController");
 
-// 🔍 Buscar perguntas de um quiz
-router.get("/perguntas/:idQuiz", function (req, res) {
-    quizController.buscarPerguntas(req, res);
-});
+// Buscar perguntas do quiz
+router.get("/perguntas/:idQuiz", quizController.buscarPerguntas);
 
-// 💾 Registrar resultado do quiz
-router.post("/resultado", function (req, res) {
-    quizController.registrarResultado(req, res);
-});
+// Registrar resultado do quiz
+router.post("/resultado", quizController.registrarResultado);
 
-// 📊 Buscar resultados anteriores de um usuário
-router.get("/resultados/:idUsuario", function (req, res) {
-    quizController.buscarResultados(req, res);
-});
+// Buscar resultados do usuário
+router.get("/resultados/:idUsuario", quizController.buscarResultados);
 
 module.exports = router;

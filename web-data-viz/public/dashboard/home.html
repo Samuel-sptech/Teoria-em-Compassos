@@ -87,17 +87,17 @@
 
         JSON.parse(sessionStorage.MODULO).forEach(item => {
             document.getElementById("cardmodulos").innerHTML += `
-            <div class="cont_filho_conteudo_modulo" onclick="abrirModulo(${item.idModulo})">
-                <div class="info-id">#${item.idModulo}</div>
-                <div class="info-nome">${item.nomeModulo}</div>
-                <div class="info-descricao">${item.descricaoModulo}</div>
+            <div class="cont_filho_conteudo_modulo" onclick="abrirModulo(${item.id})">
+                <div class="info-id">#${item.id}</div>
+                <div class="info-nome">${item.titulo}</div>
+                <div class="info-descricao">${item.descricao}</div>
             </div>
         `;
         });
     }
 
-    function abrirModulo(idModulo) {
-        sessionStorage.setItem("moduloSelecionado", idModulo);
+    function abrirModulo(id) {
+        sessionStorage.setItem("moduloSelecionado", id);
         window.location.href = "./modulo.html"; // ou o nome da sua página
     }
 

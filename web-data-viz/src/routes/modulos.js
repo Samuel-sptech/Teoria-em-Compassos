@@ -1,14 +1,10 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-var moduloController = require("../controllers/moduloController");
+const moduloController = require("../controllers/moduloController");
 
-router.get("/:empresaId", function (req, res) {
-  moduloController.listarModulosComConteudos(req, res);
-});
-
-router.post("/cadastrar", function (req, res) {
-  moduloController.cadastrar(req, res);
-})
+// 🔗 Rotas
+router.get("/", moduloController.listar);
+router.get("/:id", moduloController.buscarPorId);
 
 module.exports = router;

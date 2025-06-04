@@ -101,8 +101,8 @@ INSERT INTO modulo (nome, descricao) VALUES
 
 -- Inserts Conteúdos
 INSERT INTO conteudo (titulo, descricao, fkModulo) VALUES
-('O que é Ritmo?', 'Explicação teórica sobre o que é ritmo na música.', 1),
-('Tipos de Compassos', 'Descrição dos compassos simples e compostos.', 1),
+('O que é Ritmo?', 'organização dos sons no tempo. Ele é responsável por criar uma sensação de movimento, ordenando a duração dos sons e silêncios dentro da música. De forma simples, ritmo é quando os sons acontecem e quanto tempo eles duram. É aquilo que faz você bater o pé, balançar a cabeça ou acompanhar uma música com palmas.', 1),
+('Tipos de Compassos', ' Compasso Simples Cada tempo se divide em duas partes iguais. Muito usado em marchas, rock, pop e músicas mais regulares. Exemplos: 2/4: Dois tempos por compasso (ex.: marcha). 3/4: Três tempos por compasso (ex.: valsa). 4/4: Quatro tempos por compasso (o mais comum na música ocidental, como pop, rock e funk).', 1),
 ('Contagem Rítmica', 'Técnicas para contagem correta dos tempos.', 2),
 ('Leitura de Partituras', 'Introdução à leitura rítmica nas partituras.', 2),
 ('Exercícios Práticos de Ritmo', 'Prática com palmas e instrumentos simples.', 3),

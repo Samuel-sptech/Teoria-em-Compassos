@@ -2,21 +2,20 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teoria Musical - Som</title>
-
-    <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teoria Musical - Módulo Dinâmico</title>
 
     <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
+    <script src="../js/alerta.js"></script>
 
-    <link rel="stylesheet" href="../css/modulo.css">
+
+    <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/modulo.css" />
+
 </head>
 
-<body onload="validarSessao()">
-
-    <!-- NAVBAR -->
+<body onload="validarSessao(), carregarModulo()">
     <nav>
         <div class="cont_pai_nav">
 
@@ -44,78 +43,100 @@
 
         </div>
     </nav>
-    <!-- HEADER -->
+
     <header>
-        <h1>Teoria Musical - O Som 🎶</h1>
+        <h1 id="titulo-modulo">Carregando...</h1>
     </header>
 
-    <!-- CONTEÚDO -->
-    <div class="container">
-        <div class="intro">
-            <h2>O que é som?</h2>
-            <p>
-                O som, na música, é o elemento fundamental que dá vida às composições, permitindo a expressão artística
-                por meio da manipulação de suas propriedades. Fisicamente, o som é uma onda mecânica longitudinal
-                que se propaga através de meios materiais, como o ar, a água ou sólidos, sendo percebido pelo
-                ouvido humano quando essas vibrações atingem nossos tímpanos e são interpretadas pelo cérebro.
-            </p>
+    <main>
+        <div class="container" id="container-conteudo">
+            <!-- Conteúdo do módulo será inserido aqui -->
         </div>
 
-        <h2>Propriedades do Som</h2>
-        <div class="flashcards">
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Altura 🎵
-                    </div>
-                    <div class="card-back">
-                        Define se o som é agudo (frequência alta) ou grave (frequência baixa). É a percepção da
-                        frequência sonora.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Duração ⏳
-                    </div>
-                    <div class="card-back">
-                        É o tempo que o som permanece. Essencial para ritmo e métrica musical.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Intensidade 🔊
-                    </div>
-                    <div class="card-back">
-                        Refere-se ao volume: forte ou fraco. Determinada pela amplitude da onda sonora, medida em
-                        decibéis (dB).
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Timbre ✨
-                    </div>
-                    <div class="card-back">
-                        É a "cor" do som. Permite diferenciar instrumentos, mesmo tocando a mesma nota na mesma
-                        intensidade.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <button id="btn-quiz" style="display:none;">
+            Ir para Quiz deste Módulo 🎯
+        </button>
+    </main>
 
     <footer>
         &copy; 2025 Teoria Musical Online 🎼
     </footer>
 
+    <script>
+        async function carregarModulo() {
+            const idModulo = sessionStorage.getItem("moduloSelecionado");
+
+            if (!idModulo) {
+                document.getElementById('container-conteudo').innerText = 'Módulo não especificado.';
+                document.getElementById('titulo-modulo').innerText = 'Erro';
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`http://localhost:3333/modulos/${idModulo}`);
+
+                if (!resposta.ok) {
+                    throw new Error(`Erro ao buscar módulo: ${resposta.status}`);
+                }
+
+                const dados = await resposta.json();
+                console.log("DADOS RECEBIDOS:", dados);
+
+                if (!dados) {
+                    throw new Error('Dados do módulo não encontrados.');
+                }
+
+                document.getElementById('titulo-modulo').innerText = dados.titulo;
+
+                let html = `
+            <div class="intro">
+                <h2>Descrição do Módulo</h2>
+                <p>${dados.descricao}</p>
+            </div>
+        `;
+
+                // Se houver conteúdos vinculados
+                if (dados.conteudos && dados.conteudos.length > 0) {
+                    html += `
+                <h2>Conteúdos</h2>
+                <div class="conteudos">
+            `;
+
+                    dados.conteudos.forEach(item => {
+                        html += `
+                    <div class="card">
+                        <h3>${item.titulo}</h3>
+                        <p>${item.descricao}</p>
+                    </div>
+                `;
+                    });
+
+                    html += `</div>`;
+                }
+
+                document.getElementById('container-conteudo').innerHTML = html;
+
+                // Mostrar botão para quiz se houver quiz
+                const btnQuiz = document.getElementById('btn-quiz');
+                if (dados.quiz) {
+                    btnQuiz.style.display = 'inline-block';
+                    btnQuiz.onclick = () => {
+                        window.location.href = `quiz.html?id=${idModulo}`;
+                    };
+                } else {
+                    btnQuiz.style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('container-conteudo').innerText = `Erro: ${error.message}`;
+                document.getElementById('titulo-modulo').innerText = 'Erro ao carregar módulo';
+            }
+        }
+
+        window.onload = carregarModulo;
+
+    </script>
 </body>
 
 </html>
