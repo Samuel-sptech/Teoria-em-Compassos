@@ -1,23 +1,75 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atividade</title>
-    <link rel="stylesheet" href="../css/home.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz - Teoria de Compassos</title>
+
     <link rel="stylesheet" href="../css/quiz.css">
 
+
     <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
+    <script src="../js/alerta.js"></script>
 
     <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
 
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .text-success-with-bg {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .text-danger-with-bg {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .text-warning-with-bg {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        #jogo,
+        #pontuacao {
+            margin-top: 20px;
+        }
+
+        #opcoes span {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        button {
+            margin-right: 10px;
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+
+        #btnIniciarQuiz {
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
 </head>
 
-<body onload="validarSessao(), carregarQuestoes()">
-    <!----------------------------------------- Barra de navegação ----------------------------------------->
+<body onload="validarSessao(), onloadEsconder()">
 
+    
     <nav>
         <div class="cont_pai_nav">
 
@@ -45,133 +97,236 @@
 
         </div>
     </nav>
-    <!----------------------------------------- Barra de navegação ----------------------------------------->
 
-    <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+<div class="ajuste">
+    <h1>Quiz: Teste seus conhecimentos de Teoria Musical</h1>
 
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
-            </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span>
-                <span id="msgFinal" class="width-fit-content">***</span>
-            </div>
-        </div>
+    <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
-        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
-
-            <div id="infoQuestao" class="padding-8">
-                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-                    questões.</span>
-            </div>
-
-            <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold"></span>
-            </div>
-
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
-            </div>
-
-            <div id="opcoes" class="flex-colunar padding-8">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-            </div>
-
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-            </div>
-
-        </div>
+    <div id="pontuacao" style="display:none;">
+        <p>
+            Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de
+            <span id="qtdQuestoes"></span>
+        </p>
+        <p>Acertos: <span id="spanCertas">0</span> | Erros: <span id="spanErradas">0</span></p>
     </div>
 
-    <div>
+    <div id="jogo" style="display:none;">
+        <div id="perguntaDaQuestaoAtual" style="font-weight: bold; margin-bottom: 10px;"></div>
 
+        <div id="opcoes">
+            <label><input type="radio" name="option" value="A" /> <span id="labelOpcaoA"></span></label>
+            <label><input type="radio" name="option" value="B" /> <span id="labelOpcaoB"></span></label>
+            <label><input type="radio" name="option" value="C" /> <span id="labelOpcaoC"></span></label>
+            <label><input type="radio" name="option" value="D" /> <span id="labelOpcaoD"></span></label>
+        </div>
+
+        <div>
+            <button id="btnSubmeter" onclick="submeter()">Submeter resposta</button>
+            <button id="btnProx" onclick="avancar()" disabled>Próxima questão</button>
+        </div>
+
+        <div id="pontuacaoFinalJogo" style="margin-top: 20px; display:none;">
+            <h3>Pontuação Final: <span id="spanPontuacaoFinal"></span></h3>
+            <p id="msgFinal"></p>
+        </div>
     </div>
+</div>
+
 </body>
 
 </html>
+    <script>
+        // Exemplo estático de perguntas. Substitua pela carga via fetch para seu backend
+        const listaDeQuestoes = [
+            {
+                idPergunta: 1,
+                pergunta: "O que é um compasso na música?",
+                alternativas: {
+                    A: "É a divisão do tempo musical em partes iguais.",
+                    B: "É o tom da música.",
+                    C: "É a altura dos sons.",
+                    D: "É o volume da música."
+                },
+                correta: "A"
+            },
+            {
+                idPergunta: 2,
+                pergunta: "Qual destes é um compasso simples?",
+                alternativas: {
+                    A: "4/4",
+                    B: "6/8",
+                    C: "9/8",
+                    D: "12/8"
+                },
+                correta: "A"
+            },
+            {
+                idPergunta: 3,
+                pergunta: "Por que é importante usar um metrônomo nos estudos de ritmo?",
+                alternativas: {
+                    A: "Para garantir precisão no tempo e desenvolver estabilidade rítmica.",
+                    B: "Para tocar mais alto.",
+                    C: "Para mudar a tonalidade.",
+                    D: "Para decorar a partitura."
+                },
+                correta: "A"
+            }
+        ];
 
-<script>
-    let listaDeQuestoes = [];
+        let numeroDaQuestaoAtual = 0;
+        let pontuacaoFinal = 0;
+        let certas = 0;
+        let erradas = 0;
 
-    async function carregarQuestoes() {
-        try {
-            const resposta = await fetch('http://localhost:3000/quiz/perguntas/1');
-            const dados = await resposta.json();
-
-            listaDeQuestoes = dados.map(q => {
-                const alternativas = q.alternativas;
-
-                return {
-                    pergunta: q.pergunta,
-                    alternativaA: alternativas[0]?.texto,
-                    alternativaB: alternativas[1]?.texto,
-                    alternativaC: alternativas[2]?.texto,
-                    alternativaD: alternativas[3]?.texto,
-                    alternativaCorreta: alternativas.find(alt => alt.correta === 1)
-                        ? `alternativa${['A', 'B', 'C', 'D'][alternativas.findIndex(alt => alt.correta === 1)]}`
-                        : null
-                };
-            });
-
-            quantidadeDeQuestoes = listaDeQuestoes.length;
-            iniciarQuiz();
-
-        } catch (error) {
-            console.error('Erro ao carregar perguntas:', error);
+        function onloadEsconder() {
+            document.getElementById('pontuacao').style.display = "none";
+            document.getElementById('jogo').style.display = "none";
         }
-    }
 
-    function enviarResultado(acertos, erros) {
-    const idUsuario = sessionStorage.ID_USUARIO; // Pegando o ID do usuário logado
+        function iniciarQuiz() {
+            document.getElementById('btnIniciarQuiz').style.display = "none";
+            document.getElementById('pontuacao').style.display = "block";
+            document.getElementById('jogo').style.display = "block";
 
-    fetch("/quiz/resultado", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            idUsuario: idUsuario,
-            acertos: acertos,
-            erros: erros
-        })
-    }).then(function (resposta) {
-        console.log("Enviando resultado do quiz...");
+            document.getElementById('qtdQuestoes').textContent = listaDeQuestoes.length;
 
-        if (resposta.ok) {
-            console.log("Resultado registrado com sucesso!");
-        } else {
-            console.log("Houve um erro ao tentar registrar o resultado.");
-            resposta.text().then(texto => {
-                console.error(texto);
+            numeroDaQuestaoAtual = 0;
+            pontuacaoFinal = 0;
+            certas = 0;
+            erradas = 0;
+            document.getElementById("spanCertas").textContent = certas;
+            document.getElementById("spanErradas").textContent = erradas;
+
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+
+            document.getElementById("btnSubmeter").disabled = false;
+            document.getElementById("btnProx").disabled = true;
+            document.getElementById("btnTentarNovamente").disabled = true;
+            document.getElementById('pontuacaoFinalJogo').style.display = "none";
+        }
+
+        function preencherHTMLcomQuestaoAtual(index) {
+            limparCoresBackgroundOpcoes();
+            desmarcarRadioButtons();
+            habilitarAlternativas(true);
+
+            const questao = listaDeQuestoes[index];
+            document.getElementById("spanNumeroDaQuestaoAtual").textContent = index + 1;
+            document.getElementById("perguntaDaQuestaoAtual").textContent = questao.pergunta;
+
+            document.getElementById("labelOpcaoA").textContent = questao.alternativas.A;
+            document.getElementById("labelOpcaoB").textContent = questao.alternativas.B;
+            document.getElementById("labelOpcaoC").textContent = questao.alternativas.C;
+            document.getElementById("labelOpcaoD").textContent = questao.alternativas.D;
+        }
+
+        function submeter() {
+            const options = document.getElementsByName("option");
+            let escolha = null;
+            for (const opt of options) {
+                if (opt.checked) {
+                    escolha = opt.value;
+                    break;
+                }
+            }
+            if (!escolha) {
+                alert("Escolha uma opção antes de submeter.");
+                return;
+            }
+
+            document.getElementById("btnSubmeter").disabled = true;
+            document.getElementById("btnProx").disabled = false;
+            habilitarAlternativas(false);
+
+            checarResposta(escolha);
+        }
+
+        function checarResposta(escolha) {
+            const questao = listaDeQuestoes[numeroDaQuestaoAtual];
+            const correta = questao.correta;
+
+            // Marcar respostas
+            if (escolha === correta) {
+                marcarAlternativa(escolha, true);
+                pontuacaoFinal++;
+                certas++;
+                document.getElementById("spanCertas").textContent = certas;
+            } else {
+                marcarAlternativa(escolha, false);
+                marcarAlternativa(correta, true);
+                erradas++;
+                document.getElementById("spanErradas").textContent = erradas;
+            }
+        }
+
+        function marcarAlternativa(letra, correta) {
+            const labels = {
+                A: "labelOpcaoA",
+                B: "labelOpcaoB",
+                C: "labelOpcaoC",
+                D: "labelOpcaoD"
+            };
+            const el = document.getElementById(labels[letra]);
+            if (correta) {
+                el.classList.add("text-success-with-bg");
+            } else {
+                el.classList.add("text-danger-with-bg");
+            }
+        }
+
+        function avancar() {
+            numeroDaQuestaoAtual++;
+            if (numeroDaQuestaoAtual >= listaDeQuestoes.length) {
+                finalizarQuiz();
+            } else {
+                preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+                document.getElementById("btnSubmeter").disabled = false;
+                document.getElementById("btnProx").disabled = true;
+                habilitarAlternativas(true);
+                limparCoresBackgroundOpcoes();
+                desmarcarRadioButtons();
+                document.getElementById("btnTentarNovamente").disabled = true;
+                document.getElementById('pontuacaoFinalJogo').style.display = "none";
+            }
+        }
+
+        function finalizarQuiz() {
+            document.getElementById("jogo").style.display = "none";
+            document.getElementById("pontuacaoFinalJogo").style.display = "block";
+            document.getElementById("spanPontuacaoFinal").textContent = pontuacaoFinal + " / " + listaDeQuestoes.length;
+
+            // Mensagem simples
+            let mensagem = "";
+            const porcentagem = (pontuacaoFinal / listaDeQuestoes.length) * 100;
+            if (porcentagem === 100) {
+                mensagem = "Parabéns! Você acertou todas as questões!";
+            } else if (porcentagem >= 70) {
+                mensagem = "Muito bom! Continue praticando!";
+            } else {
+                mensagem = "Continue estudando, você pode melhorar!";
+            }
+            document.getElementById("msgFinal").textContent = mensagem;
+
+            document.getElementById("btnTentarNovamente").disabled = false;
+            document.getElementById("btnProx").disabled = true;
+            document.getElementById("btnSubmeter").disabled = true;
+        }
+
+        function desmarcarRadioButtons() {
+            const radios = document.querySelectorAll('input[name="option"]');
+            radios.forEach(r => r.checked = false);
+        }
+
+        function limparCoresBackgroundOpcoes() {
+            const labels = ["labelOpcaoA", "labelOpcaoB", "labelOpcaoC", "labelOpcaoD"];
+            labels.forEach(id => {
+                document.getElementById(id).classList.remove("text-success-with-bg", "text-danger-with-bg");
             });
         }
-    }).catch(function (erro) {
-        console.log("Erro na requisição:", erro);
-    });
-}
 
-</script>
+        function habilitarAlternativas(habilitar) {
+            const radios = document.querySelectorAll('input[name="option"]');
+            radios.forEach(r => r.disabled = !habilitar);
+        }
+    </script>

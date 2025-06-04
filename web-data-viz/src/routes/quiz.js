@@ -3,10 +3,10 @@ const router = express.Router();
 
 const quizController = require("../controllers/quizController");
 
-// Buscar perguntas do quiz
+// Obter perguntas e alternativas aninhadas
 router.get("/perguntas/:idQuiz", quizController.buscarPerguntas);
 
-// Registrar resultado do quiz
+// Registrar respostas do usuário (em lote)
 router.post("/resultado", quizController.registrarResultado);
 
 // Buscar resultados do usuário

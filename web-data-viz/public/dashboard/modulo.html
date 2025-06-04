@@ -115,26 +115,12 @@
                 }
 
                 document.getElementById('container-conteudo').innerHTML = html;
-
-                // Mostrar botão para quiz se houver quiz
-                const btnQuiz = document.getElementById('btn-quiz');
-                if (dados.quiz) {
-                    btnQuiz.style.display = 'inline-block';
-                    btnQuiz.onclick = () => {
-                        window.location.href = `quiz.html?id=${idModulo}`;
-                    };
-                } else {
-                    btnQuiz.style.display = 'none';
-                }
-
             } catch (error) {
                 console.error(error);
                 document.getElementById('container-conteudo').innerText = `Erro: ${error.message}`;
                 document.getElementById('titulo-modulo').innerText = 'Erro ao carregar módulo';
             }
         }
-
-        window.onload = carregarModulo;
 
     </script>
 </body>
