@@ -42,7 +42,7 @@ a:hover {
 
 /* ===================== HOME ===================== */
 .cont_pai_home {
-    background-color: var(--bg-site);
+    background-color: var(--bg-element);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,13 @@ a:hover {
     align-items: center;
     padding: 30px;
     border-radius: 8px;
+    padding: 100px;
     gap: 20px;
+    height: 10px;
+}
+
+.cont_filho_home img{
+    height: 10px;
 }
 
 .cont_filho_home button {
@@ -108,7 +114,6 @@ a:hover {
 
 .cont_filho_sobreN_esquerda {
     background-color: var(--bg-element);
-    flex: 2;
     min-width: 300px;
     display: flex;
     align-items: center;

@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro</title>
+
+    <script src="../js/sessao.js"></script>
+
   <link rel="stylesheet" href="css/nav_footer_padrao.css" />
   <link rel="stylesheet" href="css/cadastrar.css">
   <link rel="stylesheet" href="css/estilo.css">
@@ -81,11 +84,9 @@
   <!----------------------------    cadastrar   ---------------------------->
 
   <!--footer inicio-->
-  <footer>
-    <div>© 2025 Seu Site</div>
-    <div>Desenvolvido por Você</div>
-    <div>Contato: email@exemplo.com</div>
-  </footer>
+        <footer>
+            &copy; 2025  Teoria em Compasso 🎼
+        </footer>
   <!--footer fim-->
 </body>
 
@@ -212,8 +213,6 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
@@ -240,7 +239,7 @@
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
 
     return false;
