@@ -426,3 +426,12 @@ canvas {
   margin-bottom: 100px;
   cursor: pointer;
 }
+
+/* FOOTER */
+footer {
+    background-color: #8d6e63;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    margin-left: 200px;
+}

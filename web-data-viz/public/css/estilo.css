@@ -335,3 +335,12 @@ input {
   75%  {transform: rotate(-25deg)}
   100% {transform: rotate(25deg)}
 }
+
+/* FOOTER */
+footer {
+    background-color: #8d6e63;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    margin-left: 200px;
+}
