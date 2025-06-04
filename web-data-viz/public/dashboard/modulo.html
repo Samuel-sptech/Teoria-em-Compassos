@@ -48,16 +48,6 @@
         <h1 id="titulo-modulo">Carregando...</h1>
     </header>
 
-    <main>
-        <div class="container" id="container-conteudo">
-            <!-- Conteúdo do módulo será inserido aqui -->
-        </div>
-
-        <button id="btn-quiz" style="display:none;">
-            Ir para Quiz deste Módulo 🎯
-        </button>
-    </main>
-
     <footer>
         &copy; 2025 Teoria em Compassos 🎼
     </footer>
@@ -73,7 +63,7 @@
             }
 
             try {
-                const resposta = await fetch(`http://localhost:3333/modulos/${idModulo}`);
+                const resposta = await fetch(`http://localhost:8080/modulos/${idModulo}`);
 
                 if (!resposta.ok) {
                     throw new Error(`Erro ao buscar módulo: ${resposta.status}`);
