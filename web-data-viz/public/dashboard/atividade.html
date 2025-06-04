@@ -8,68 +8,15 @@
 
     <link rel="stylesheet" href="../css/quiz.css">
 
-
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
 
     <link rel="icon" href="../assets/Teoria_em_Compasso-Logo.ico" type="image/x-icon">
 
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        .text-success-with-bg {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 5px;
-            border-radius: 3px;
-        }
-
-        .text-danger-with-bg {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 5px;
-            border-radius: 3px;
-        }
-
-        .text-warning-with-bg {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 5px;
-            border-radius: 3px;
-        }
-
-        #jogo,
-        #pontuacao {
-            margin-top: 20px;
-        }
-
-        #opcoes span {
-            display: block;
-            margin: 8px 0;
-            cursor: pointer;
-        }
-
-        button {
-            margin-right: 10px;
-            margin-top: 10px;
-            padding: 8px 16px;
-            font-size: 16px;
-        }
-
-        #btnIniciarQuiz {
-            font-weight: bold;
-            font-size: 18px;
-        }
-    </style>
 </head>
 
 <body onload="validarSessao(), onloadEsconder()">
 
-    
     <nav>
         <div class="cont_pai_nav">
 
@@ -98,235 +45,313 @@
         </div>
     </nav>
 
-<div class="ajuste">
-    <h1>Quiz: Teste seus conhecimentos de Teoria Musical</h1>
+    <div class="ajuste">
+        <h1>Quiz: Teste seus conhecimentos de Teoria Musical</h1>
 
-    <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
-    <div id="pontuacao" style="display:none;">
-        <p>
-            Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de
-            <span id="qtdQuestoes"></span>
-        </p>
-        <p>Acertos: <span id="spanCertas">0</span> | Erros: <span id="spanErradas">0</span></p>
+        <div id="pontuacao" style="display:none;">
+            <p>
+                Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de
+                <span id="qtdQuestoes"></span>
+            </p>
+            <p>Acertos: <span id="spanCertas">0</span> | Erros: <span id="spanErradas">0</span></p>
+        </div>
+
+        <div id="jogo" style="display:none;">
+            <div id="perguntaDaQuestaoAtual" style="font-weight: bold; margin-bottom: 10px;"></div>
+
+            <div id="opcoes">
+                <label><input type="radio" name="option" value="A" /> <span id="labelOpcaoA"></span></label>
+                <label><input type="radio" name="option" value="B" /> <span id="labelOpcaoB"></span></label>
+                <label><input type="radio" name="option" value="C" /> <span id="labelOpcaoC"></span></label>
+                <label><input type="radio" name="option" value="D" /> <span id="labelOpcaoD"></span></label>
+            </div>
+
+            <div>
+                <button id="btnSubmeter" onclick="submeter()">Submeter resposta</button>
+                <button id="btnProx" onclick="avancar()" disabled>Próxima questão</button>
+            </div>
+
+            <div id="pontuacaoFinalJogo" style="margin-top: 20px; display:none;">
+                <h3>Pontuação Final: <span id="spanPontuacaoFinal"></span></h3>
+                <p id="msgFinal"></p>
+            </div>
+        </div>
     </div>
-
-    <div id="jogo" style="display:none;">
-        <div id="perguntaDaQuestaoAtual" style="font-weight: bold; margin-bottom: 10px;"></div>
-
-        <div id="opcoes">
-            <label><input type="radio" name="option" value="A" /> <span id="labelOpcaoA"></span></label>
-            <label><input type="radio" name="option" value="B" /> <span id="labelOpcaoB"></span></label>
-            <label><input type="radio" name="option" value="C" /> <span id="labelOpcaoC"></span></label>
-            <label><input type="radio" name="option" value="D" /> <span id="labelOpcaoD"></span></label>
-        </div>
-
-        <div>
-            <button id="btnSubmeter" onclick="submeter()">Submeter resposta</button>
-            <button id="btnProx" onclick="avancar()" disabled>Próxima questão</button>
-        </div>
-
-        <div id="pontuacaoFinalJogo" style="margin-top: 20px; display:none;">
-            <h3>Pontuação Final: <span id="spanPontuacaoFinal"></span></h3>
-            <p id="msgFinal"></p>
-        </div>
-    </div>
-</div>
 
 </body>
 
 </html>
-    <script>
-        // Exemplo estático de perguntas. Substitua pela carga via fetch para seu backend
-        const listaDeQuestoes = [
-            {
-                idPergunta: 1,
-                pergunta: "O que é um compasso na música?",
-                alternativas: {
-                    A: "É a divisão do tempo musical em partes iguais.",
-                    B: "É o tom da música.",
-                    C: "É a altura dos sons.",
-                    D: "É o volume da música."
-                },
-                correta: "A"
+
+<script>
+    const listaDeQuestoes = [
+        {
+            idPergunta: 1,
+            pergunta: "O que é um compasso na música?",
+            alternativas: {
+                A: "É a divisão do tempo musical em partes iguais.",
+                B: "É o tom da música.",
+                C: "É a altura dos sons.",
+                D: "É o volume da música."
             },
-            {
-                idPergunta: 2,
-                pergunta: "Qual destes é um compasso simples?",
-                alternativas: {
-                    A: "4/4",
-                    B: "6/8",
-                    C: "9/8",
-                    D: "12/8"
-                },
-                correta: "A"
+            correta: "A"
+        },
+        {
+            idPergunta: 2,
+            pergunta: "Qual destes é um compasso simples?",
+            alternativas: {
+                A: "4/4",
+                B: "6/8",
+                C: "9/8",
+                D: "12/8"
             },
-            {
-                idPergunta: 3,
-                pergunta: "Por que é importante usar um metrônomo nos estudos de ritmo?",
-                alternativas: {
-                    A: "Para garantir precisão no tempo e desenvolver estabilidade rítmica.",
-                    B: "Para tocar mais alto.",
-                    C: "Para mudar a tonalidade.",
-                    D: "Para decorar a partitura."
-                },
-                correta: "A"
+            correta: "A"
+        },
+        {
+            idPergunta: 3,
+            pergunta: "Por que é importante usar um metrônomo nos estudos de ritmo?",
+            alternativas: {
+                A: "Para garantir precisão no tempo e desenvolver estabilidade rítmica.",
+                B: "Para tocar mais alto.",
+                C: "Para mudar a tonalidade.",
+                D: "Para decorar a partitura."
+            },
+            correta: "A"
+        },
+        {
+            idPergunta: 4,
+            pergunta: "Qual é o valor da semínima em relação à semibreve?",
+            alternativas: {
+                A: "Metade do valor da semibreve.",
+                B: "O dobro do valor da semibreve.",
+                C: "Igual ao valor da semibreve.",
+                D: "Um quarto do valor da semibreve."
+            },
+            correta: "A"
+        },
+        {
+            idPergunta: 5,
+            pergunta: "O que indica o número superior na assinatura de compasso?",
+            alternativas: {
+                A: "O número de tempos em cada compasso.",
+                B: "O valor da unidade de tempo.",
+                C: "A velocidade da música.",
+                D: "O tom da música."
+            },
+            correta: "A"
+        },
+        {
+            idPergunta: 6,
+            pergunta: "Qual a principal função do ritmo em uma música?",
+            alternativas: {
+                A: "Controlar a melodia",
+                B: "Organizar a duração dos sons e silêncios no tempo",
+                C: "Definir a tonalidade",
+                D: "Regular o volume da música"
+            },
+            correta: "B"
+        },
+        {
+            idPergunta: 7,
+            pergunta: "Qual dos seguintes compassos é considerado um compasso simples?",
+            alternativas: {
+                A: "6/8",
+                B: "3/4",
+                C: "9/8",
+                D: "12/8"
+            },
+            correta: "B"
+        },
+        {
+            idPergunta: 8,
+            pergunta: "O que significa \"contagem rítmica\"?",
+            alternativas: {
+                A: "Contar o número de instrumentos na música",
+                B: "Medir a duração dos sons em uma música",
+                C: "Seguir o compasso para manter o tempo correto",
+                D: "Determinar a tonalidade da música"
+            },
+            correta: "C"
+        },
+        {
+            idPergunta: 9,
+            pergunta: "Ao ler uma partitura, o que indica o número inferior na fórmula do compasso?",
+            alternativas: {
+                A: "Quantos tempos há por compasso",
+                B: "Qual a figura musical que representa a unidade de tempo",
+                C: "O andamento da música",
+                D: "O número de instrumentos"
+            },
+            correta: "B"
+        },
+        {
+            idPergunta: 10,
+            pergunta: "Qual é o principal benefício de praticar exercícios rítmicos com palmas?",
+            alternativas: {
+                A: "Melhorar a precisão rítmica e o senso de tempo",
+                B: "Aprender a tocar um instrumento",
+                C: "Aumentar a velocidade da música",
+                D: "Decorara partituras"
+            },
+            correta: "A"
+        },
+        {
+            idPergunta: 11,
+            pergunta: "Para que serve um metrônomo na prática musical?",
+            alternativas: {
+                A: "Ajustar o volume dos instrumentos",
+                B: "Manter um ritmo constante durante a prática",
+                C: "Alterar a tonalidade da música",
+                D: "Escolher o instrumento certo para tocar"
+            },
+            correta: "B"
+        }
+    ];
+
+    let numeroDaQuestaoAtual = 0;
+    let pontuacaoFinal = 0;
+    let certas = 0;
+    let erradas = 0;
+
+    function onloadEsconder() {
+        document.getElementById('pontuacao').style.display = "none";
+        document.getElementById('jogo').style.display = "none";
+    }
+
+    function iniciarQuiz() {
+        document.getElementById('btnIniciarQuiz').style.display = "none";
+        document.getElementById('pontuacao').style.display = "block";
+        document.getElementById('jogo').style.display = "block";
+
+        document.getElementById('qtdQuestoes').textContent = listaDeQuestoes.length;
+
+        numeroDaQuestaoAtual = 0;
+        pontuacaoFinal = 0;
+        certas = 0;
+        erradas = 0;
+        document.getElementById("spanCertas").textContent = certas;
+        document.getElementById("spanErradas").textContent = erradas;
+
+        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+
+        document.getElementById("btnSubmeter").disabled = false;
+        document.getElementById("btnProx").disabled = true;
+        document.getElementById("btnTentarNovamente").disabled = true;
+        document.getElementById('pontuacaoFinalJogo').style.display = "none";
+    }
+
+    function preencherHTMLcomQuestaoAtual(index) {
+        limparCoresBackgroundOpcoes();
+        desmarcarRadioButtons();
+        habilitarAlternativas(true);
+
+        const questao = listaDeQuestoes[index];
+        document.getElementById("spanNumeroDaQuestaoAtual").textContent = index + 1;
+        document.getElementById("perguntaDaQuestaoAtual").textContent = questao.pergunta;
+
+        document.getElementById("labelOpcaoA").textContent = questao.alternativas.A;
+        document.getElementById("labelOpcaoB").textContent = questao.alternativas.B;
+        document.getElementById("labelOpcaoC").textContent = questao.alternativas.C;
+        document.getElementById("labelOpcaoD").textContent = questao.alternativas.D;
+    }
+
+    function submeter() {
+        const options = document.getElementsByName("option");
+        let selecionada = null;
+        for (const option of options) {
+            if (option.checked) {
+                selecionada = option.value;
+                break;
             }
-        ];
-
-        let numeroDaQuestaoAtual = 0;
-        let pontuacaoFinal = 0;
-        let certas = 0;
-        let erradas = 0;
-
-        function onloadEsconder() {
-            document.getElementById('pontuacao').style.display = "none";
-            document.getElementById('jogo').style.display = "none";
         }
 
-        function iniciarQuiz() {
-            document.getElementById('btnIniciarQuiz').style.display = "none";
-            document.getElementById('pontuacao').style.display = "block";
-            document.getElementById('jogo').style.display = "block";
+        if (!selecionada) {
+            alert("Por favor, selecione uma alternativa antes de submeter.");
+            return;
+        }
 
-            document.getElementById('qtdQuestoes').textContent = listaDeQuestoes.length;
+        document.getElementById("btnSubmeter").disabled = true;
+        document.getElementById("btnProx").disabled = false;
 
-            numeroDaQuestaoAtual = 0;
-            pontuacaoFinal = 0;
-            certas = 0;
-            erradas = 0;
-            document.getElementById("spanCertas").textContent = certas;
-            document.getElementById("spanErradas").textContent = erradas;
+        const questao = listaDeQuestoes[numeroDaQuestaoAtual];
+        if (selecionada === questao.correta) {
+            pontuacaoFinal++;
+            certas++;
+            marcarOpcaoCorreta(selecionada, true);
+        } else {
+            erradas++;
+            marcarOpcaoCorreta(questao.correta, true);
+            marcarOpcaoCorreta(selecionada, false);
+        }
 
+        document.getElementById("spanCertas").textContent = certas;
+        document.getElementById("spanErradas").textContent = erradas;
+    }
+
+    function marcarOpcaoCorreta(letra, correta) {
+        const labels = document.querySelectorAll("#opcoes label");
+        labels.forEach(label => {
+            const input = label.querySelector("input");
+            if (input.value === letra) {
+                if (correta) {
+                    label.classList.add("text-success-with-bg");
+                } else {
+                    label.classList.add("text-danger-with-bg");
+                }
+            }
+        });
+    }
+
+    function limparCoresBackgroundOpcoes() {
+        const labels = document.querySelectorAll("#opcoes label");
+        labels.forEach(label => {
+            label.classList.remove("text-success-with-bg");
+            label.classList.remove("text-danger-with-bg");
+        });
+    }
+
+    function desmarcarRadioButtons() {
+        const options = document.getElementsByName("option");
+        options.forEach(option => option.checked = false);
+    }
+
+    function avancar() {
+        numeroDaQuestaoAtual++;
+        if (numeroDaQuestaoAtual < listaDeQuestoes.length) {
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
 
             document.getElementById("btnSubmeter").disabled = false;
             document.getElementById("btnProx").disabled = true;
-            document.getElementById("btnTentarNovamente").disabled = true;
-            document.getElementById('pontuacaoFinalJogo').style.display = "none";
+        } else {
+            finalizar();
+        }
+    }
+
+    function finalizar() {
+        document.getElementById("jogo").style.display = "none";
+        document.getElementById("pontuacaoFinalJogo").style.display = "block";
+        document.getElementById("spanPontuacaoFinal").textContent = pontuacaoFinal + " de " + listaDeQuestoes.length;
+
+        let msg = "";
+
+        const percentual = (pontuacaoFinal / listaDeQuestoes.length) * 100;
+
+        if (percentual === 100) {
+            msg = "Parabéns! Você acertou todas as questões!";
+        } else if (percentual >= 70) {
+            msg = "Muito bom! Você tem um ótimo conhecimento.";
+        } else if (percentual >= 40) {
+            msg = "Legal, mas vale revisar os conceitos.";
+        } else {
+            msg = "Recomendo revisar o material para melhorar.";
         }
 
-        function preencherHTMLcomQuestaoAtual(index) {
-            limparCoresBackgroundOpcoes();
-            desmarcarRadioButtons();
-            habilitarAlternativas(true);
-
-            const questao = listaDeQuestoes[index];
-            document.getElementById("spanNumeroDaQuestaoAtual").textContent = index + 1;
-            document.getElementById("perguntaDaQuestaoAtual").textContent = questao.pergunta;
-
-            document.getElementById("labelOpcaoA").textContent = questao.alternativas.A;
-            document.getElementById("labelOpcaoB").textContent = questao.alternativas.B;
-            document.getElementById("labelOpcaoC").textContent = questao.alternativas.C;
-            document.getElementById("labelOpcaoD").textContent = questao.alternativas.D;
-        }
-
-        function submeter() {
-            const options = document.getElementsByName("option");
-            let escolha = null;
-            for (const opt of options) {
-                if (opt.checked) {
-                    escolha = opt.value;
-                    break;
-                }
-            }
-            if (!escolha) {
-                alert("Escolha uma opção antes de submeter.");
-                return;
-            }
-
-            document.getElementById("btnSubmeter").disabled = true;
-            document.getElementById("btnProx").disabled = false;
-            habilitarAlternativas(false);
-
-            checarResposta(escolha);
-        }
-
-        function checarResposta(escolha) {
-            const questao = listaDeQuestoes[numeroDaQuestaoAtual];
-            const correta = questao.correta;
-
-            // Marcar respostas
-            if (escolha === correta) {
-                marcarAlternativa(escolha, true);
-                pontuacaoFinal++;
-                certas++;
-                document.getElementById("spanCertas").textContent = certas;
-            } else {
-                marcarAlternativa(escolha, false);
-                marcarAlternativa(correta, true);
-                erradas++;
-                document.getElementById("spanErradas").textContent = erradas;
-            }
-        }
-
-        function marcarAlternativa(letra, correta) {
-            const labels = {
-                A: "labelOpcaoA",
-                B: "labelOpcaoB",
-                C: "labelOpcaoC",
-                D: "labelOpcaoD"
-            };
-            const el = document.getElementById(labels[letra]);
-            if (correta) {
-                el.classList.add("text-success-with-bg");
-            } else {
-                el.classList.add("text-danger-with-bg");
-            }
-        }
-
-        function avancar() {
-            numeroDaQuestaoAtual++;
-            if (numeroDaQuestaoAtual >= listaDeQuestoes.length) {
-                finalizarQuiz();
-            } else {
-                preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
-                document.getElementById("btnSubmeter").disabled = false;
-                document.getElementById("btnProx").disabled = true;
-                habilitarAlternativas(true);
-                limparCoresBackgroundOpcoes();
-                desmarcarRadioButtons();
-                document.getElementById("btnTentarNovamente").disabled = true;
-                document.getElementById('pontuacaoFinalJogo').style.display = "none";
-            }
-        }
-
-        function finalizarQuiz() {
-            document.getElementById("jogo").style.display = "none";
-            document.getElementById("pontuacaoFinalJogo").style.display = "block";
-            document.getElementById("spanPontuacaoFinal").textContent = pontuacaoFinal + " / " + listaDeQuestoes.length;
-
-            // Mensagem simples
-            let mensagem = "";
-            const porcentagem = (pontuacaoFinal / listaDeQuestoes.length) * 100;
-            if (porcentagem === 100) {
-                mensagem = "Parabéns! Você acertou todas as questões!";
-            } else if (porcentagem >= 70) {
-                mensagem = "Muito bom! Continue praticando!";
-            } else {
-                mensagem = "Continue estudando, você pode melhorar!";
-            }
-            document.getElementById("msgFinal").textContent = mensagem;
-
-            document.getElementById("btnTentarNovamente").disabled = false;
-            document.getElementById("btnProx").disabled = true;
-            document.getElementById("btnSubmeter").disabled = true;
-        }
-
-        function desmarcarRadioButtons() {
-            const radios = document.querySelectorAll('input[name="option"]');
-            radios.forEach(r => r.checked = false);
-        }
-
-        function limparCoresBackgroundOpcoes() {
-            const labels = ["labelOpcaoA", "labelOpcaoB", "labelOpcaoC", "labelOpcaoD"];
-            labels.forEach(id => {
-                document.getElementById(id).classList.remove("text-success-with-bg", "text-danger-with-bg");
-            });
-        }
-
-        function habilitarAlternativas(habilitar) {
-            const radios = document.querySelectorAll('input[name="option"]');
-            radios.forEach(r => r.disabled = !habilitar);
-        }
-    </script>
+        document.getElementById("msgFinal").textContent = msg;
+    }
+    
+    function habilitarAlternativas(estado) {
+        const options = document.getElementsByName("option");
+        options.forEach(option => option.disabled = !estado);
+    }
+</script>

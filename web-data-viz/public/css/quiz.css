@@ -98,7 +98,7 @@ nav .cont_pai_nav {
     margin-left: 220px;
 }
 
-#btnSubmeter, #btnProx{
+#btnSubmeter, #btnProx, #btnTentarNovamente{
     background-color: #5d4037;
     color: white;
     border-radius: 8px;
@@ -110,7 +110,7 @@ nav .cont_pai_nav {
     margin-bottom: 20px;
 }
 
-#btnSubmeter:hover, #btnProx:hover{
+#btnSubmeter:hover, #btnProx:hover, #btnTentarNovamente:hover{
     background-color: #8d6e63;
 }
 
